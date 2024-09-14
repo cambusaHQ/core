@@ -1,5 +1,24 @@
 # Changelog
 
+## [0.0.4](https://github.com/enricodeleo/cambusa/compare/0.0.3...0.0.4) (2024-09-14)
+
+
+### Features
+
+* add cors, requestLogger, and swagger middlewares for enhanced functionality ([fe15e01](https://github.com/enricodeleo/cambusa/commit/fe15e018b783040aa686d50b49714faa855cd907))
+* add User model and createUser controller for user management ([728e084](https://github.com/enricodeleo/cambusa/commit/728e0844618f22d6d13481852ddf50e1c2c0646f))
+* **api/controllers/users/list.js:** implement database integration for user listing functionality ([c01a26f](https://github.com/enricodeleo/cambusa/commit/c01a26fe051572fa4bd819247549694118dae580))
+
+
+### Documentation
+
+* **README.md:** expand database setup instructions to include support for multiple databases and add configuration examples for SQLite and PostgreSQL ([6587301](https://github.com/enricodeleo/cambusa/commit/6587301dcd58eba74e09ebeb7db07e173723d1a5))
+
+
+### Code Refactoring
+
+* **app.js, config, models, lib:** streamline app initialization and model loading ([ab01f4d](https://github.com/enricodeleo/cambusa/commit/ab01f4d3973a0a9beb1fe71ba95aefe0a5d07f06))
+
 ## [0.0.3](https://github.com/enricodeleo/cambusa/compare/0.0.2...0.0.3) (2024-09-14)
 
 
