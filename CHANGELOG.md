@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.3](https://github.com/enricodeleo/cambusa/compare/0.0.2...0.0.3) (2024-09-14)
+
+
+### Features
+
+* implement dynamic middleware loading mechanism for scalability ([798be3b](https://github.com/enricodeleo/cambusa/commit/798be3ba79519d3a6270057d8186dfaf81326a61))
+
 ## 0.0.2 (2024-09-14)
 
 
