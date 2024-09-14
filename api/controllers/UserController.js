@@ -1,6 +1,7 @@
 export async function getUsers({ request, response }) {
   // Implement your logic to retrieve users
   // For demonstration, we'll return a static array of users
+
   return [
     { id: 1, name: 'John Doe' },
     { id: 2, name: 'Jane Doe' },

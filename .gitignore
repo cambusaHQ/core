@@ -2,6 +2,9 @@
 
 .env
 
+# Env specific
+config/custom.js
+
 # dependencies
 /node_modules
 /.pnp
