@@ -4,6 +4,8 @@
 
 # Env specific
 config/custom.js
+.cambusa
+database.sqlite
 
 # dependencies
 /node_modules

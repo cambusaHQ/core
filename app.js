@@ -24,7 +24,8 @@ cambusa.log.info('⚙️  Middlewares loaded.');
 
 // Load models
 cambusa.db = await datastore(cambusa);
-cambusa.log.info('📚  Models loaded.');
+await cambusa.db.initialize();
+cambusa.log.info('📚  Database initialized.');
 
 // Load routes from the lib directory
 await loadRoutes();

@@ -64,6 +64,8 @@ cambusa-app/
 │   └── cors.js
 │   └── requestLogger.js
 │   └── swagger.js
+├── models/
+│   └── User.js
 ├── app.js
 ├── package.json
 └── bunfig.toml
@@ -207,6 +209,43 @@ export async function getUsers({ request, response }) {
     { id: 2, name: 'Bob' },
   ];
 }
+```
+
+## Database Setup
+
+The project uses TypeORM with better-sqlite3 as the default database provider. You can easily switch to another provider by updating the `config/datastore.js`.
+
+### Configuration
+
+Update the `config/datastore.js` file to define the database connection:
+
+```js
+export default {
+  database: {
+    provider: 'better-sqlite3',
+    url: './database.sqlite',
+  },
+};
+```
+
+### Loading Models
+M
+odels are automatically loaded from the `models/` directory. Each model is defined using TypeORM's EntitySchema.
+
+**Example:** `models/User.js`
+
+```js
+export const User = {
+  name: 'User',
+  tableName: 'users',
+  columns: {
+    id: { primary: true, type: 'int', generated: true },
+    name: { type: 'varchar' },
+    email: { type: 'varchar', unique: true },
+  },
+};
+
+export default User;
 ```
 
 ## Swagger documentation
