@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./",         // Set the base URL for the project
+    "paths": {
+      "@/*": ["./*"],
+      "@lib/*": ["lib/*"],
+      "@controllers/*": ["api/controllers/*"],
+      "@config/*": ["config/*"],
+      "@bin/*": ["bin/*"]
+    }
+  },
+  "exclude": ["node_modules"]
+}
