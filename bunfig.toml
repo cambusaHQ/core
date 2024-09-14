@@ -1,0 +1,7 @@
+# bunfig.toml
+[aliases]
+"@/*" = "./*"
+"@lib/*" = "./lib/*"
+"@controllers/*" = "./api/controllers/*"
+"@config/*" = "./config/*"
+"@bin/*" = "./bin/*"

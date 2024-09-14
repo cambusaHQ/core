@@ -1,15 +1,25 @@
 import 'dotenv/config';
 import { Elysia } from 'elysia';
 import config from '@/config';
+import logger from '@lib/logger';
+
+import requestLogger from '@lib/plugins/requestLogger';
 
 // Initialize the global cambusa object
 global.cambusa = {
   config,
-  // ... other global properties like services, loggers, etc.
+  log: logger,
 };
 
 // Create a new Elysia app instance
 const app = new Elysia();
+
+cambusa.log.info('Starting Cambusa server...');
+
+// Conditionally apply request logging middleware based on configuration
+if (cambusa.config.logger?.logRequests) {
+  app.use(requestLogger);
+}
 
 // Load routes from the lib directory
 import loadRoutes from '@lib/routesLoader.js';
@@ -22,5 +32,10 @@ app.listen({
   port: normalizedPort,
   hostname: host,
  }, () => {
-  console.log(`Cambusa server running at http://${host}:${port}`);
+  logger.info(`Cambusa server running at http://${host}:${port} in ${config.env} mode`);
+});
+
+// Global errors
+app.on('error', (err) => {
+  logger.error(`Unhandled error: ${err.message}`, err);
 });

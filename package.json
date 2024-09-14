@@ -10,7 +10,6 @@
     "bun": ">= 1.1.0"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "bun run app.js",
     "dev": "bun run --watch app.js",
     "prisma:generate": "prisma generate --schema=src/prisma/schema.prisma",
@@ -28,6 +27,8 @@
     "jsonwebtoken": "^9.0.2",
     "logestic": "^1.2.3",
     "minimist": "^1.2.8",
+    "pino": "^9.4.0",
+    "pino-pretty": "^11.2.2",
     "require-all": "^3.0.0"
   },
   "devDependencies": {

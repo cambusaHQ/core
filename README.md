@@ -31,8 +31,8 @@ The name reflects my modest approach to web development, inspired by Sails.js bu
 
 ```bash
 # Clone the repository (assuming Cambusa is hosted on GitHub)
-git clone https://github.com/yourusername/cambusa-app.git
-cd cambusa-app
+git clone https://github.com/enricodeleo/cambusa.git
+cd cambusa
 
 # Install dependencies
 bun install
@@ -208,6 +208,49 @@ export async function createUser({ request, response }) {
   };
   return newUser;
 }
+```
+
+## Logging
+
+Cambusa uses [Pino](https://github.com/pinojs/pino) for fast, structured logging. The logger is available globally as cambusa.log, and its configuration can be customized per environment.
+
+### Log Levels
+
+The log level can be configured in the `logger` section of your configuration files. For example:
+
+```js
+// config/logger.js
+export default {
+  logger: {
+    level: 'info',  // Default log level
+    logRequests: true,  // Log requests by default
+  },
+};
+```
+
+In development, logs are prettified for better readability, while in production, logs are structured JSON for performance and better integration with logging systems.
+
+### Request Logging
+
+You can enable or disable logging of each incoming HTTP request. When enabled, each request will be logged with the HTTP method, URL, response status, and duration.
+
+To disable request logging (e.g., in production):
+
+```js
+export default {
+  logger: {
+    logRequests: false,
+  },
+};
+```
+
+### Usage
+
+The logger can be accessed globally via `cambusa.log`:
+
+```js
+cambusa.log.info('Server is starting...');
+cambusa.log.error('An error occurred', err);
 ```
 
 ## Philosophy
