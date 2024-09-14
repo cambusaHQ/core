@@ -1,6 +1,6 @@
 export default {
   database: {
-    url: 'postgresql://admin:password@db:5432/cambusa?schema=public',
-    poolSize: 10,
+    provider: 'better-sqlite3', // Change this to mysql, sqlite, etc.
+    url: 'sqlite://./database.sqlite',
   },
 };

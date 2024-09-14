@@ -13,14 +13,12 @@
   "scripts": {
     "start": "bun run app.js",
     "dev": "bun run --watch app.js",
-    "prisma:generate": "prisma generate --schema=src/prisma/schema.prisma",
-    "prisma:migrate": "prisma migrate dev --schema=src/prisma/schema.prisma",
     "release": "release-it"
   },
   "dependencies": {
     "@elysiajs/cors": "^1.1.1",
     "@elysiajs/swagger": "^1.1.1",
-    "@prisma/client": "^5.19.1",
+    "better-sqlite3": "^11.3.0",
     "boolean": "^3.2.0",
     "dotenv": "^16.4.5",
     "elysia": "latest",
@@ -29,13 +27,16 @@
     "jsonwebtoken": "^9.0.2",
     "logestic": "^1.2.3",
     "minimist": "^1.2.8",
+    "npm": "^10.8.3",
     "pino": "^9.4.0",
     "pino-pretty": "^11.2.2",
-    "require-all": "^3.0.0"
+    "reflect-metadata": "^0.2.2",
+    "require-all": "^3.0.0",
+    "sqlite3": "^5.1.7",
+    "typeorm": "^0.3.20"
   },
   "devDependencies": {
     "@release-it/conventional-changelog": "^8.0.2",
-    "prisma": "^5.19.1",
     "release-it": "^17.6.0"
   }
 }

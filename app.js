@@ -1,54 +1,47 @@
 import 'dotenv/config';
 import { Elysia } from 'elysia';
-import config from '@/config';
+
+import loadMiddlewares from '@lib/middlewaresLoader';
+import loadRoutes from '@lib/routesLoader.js';
+import datastore from '@lib/datastore.js';
 import logger from '@lib/logger';
+import welcomeBanner from '@lib/welcomeBanner';
+
+import config from '@/config';
 
 // Initialize the global cambusa object
-global.cambusa = {
-  config,
-  log: logger,
-};
+const cambusa = global.cambusa = { config };
 
 // Create a new Elysia app instance
-const app = new Elysia();
+cambusa.app = new Elysia().decorate('cambusa', cambusa);
 
-// Function to print the welcome banner
-function printWelcomeBanner({ host, port }) {
-  console.log(`
-************************************************************
-*                                                          *
-*                    Welcome to Cambusa 🚣                 *
-*           Your modern framework for smooth sailing       *
-*                                                          *
-*                  Running at ${host}:${port}                 *
-*                                                          *
-************************************************************
-  `.trim());
-}
+// Inject logger
+cambusa.log = logger(cambusa);
 
 // Dynamically load and apply middlewares
-import loadMiddlewares from '@lib/middlewaresLoader';
-await loadMiddlewares(app);
-
+await loadMiddlewares();
 cambusa.log.info('⚙️  Middlewares loaded.');
 
-// Load routes from the lib directory
-import loadRoutes from '@lib/routesLoader.js';
-await loadRoutes(app);
+// Load models
+cambusa.db = await datastore(cambusa);
+cambusa.log.info('📚  Models loaded.');
 
+// Load routes from the lib directory
+await loadRoutes();
 cambusa.log.info('🗺️  Routes loaded.');
+
 
 // Start the server
 const { host, port } = cambusa.config.server;
 const normalizedPort = parseInt(port, 10);
-app.listen({
+cambusa.app.listen({
   port: normalizedPort,
   hostname: host,
  }, () => {
-  printWelcomeBanner({ host, port }); // Print the welcome banner
+  welcomeBanner({ host, port }); // Print the welcome banner
 });
 
 // Global errors
-app.on('error', (err) => {
+cambusa.app.on('error', (err) => {
   logger.error(`Unhandled error: ${err.message}`, err);
 });

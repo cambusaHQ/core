@@ -3,10 +3,12 @@
     "baseUrl": "./",         // Set the base URL for the project
     "paths": {
       "@/*": ["./*"],
-      "@lib/*": ["lib/*"],
-      "@controllers/*": ["api/controllers/*"],
+      "@bin/*": ["bin/*"],
       "@config/*": ["config/*"],
-      "@bin/*": ["bin/*"]
+      "@controllers/*": ["api/controllers/*"],
+      "@lib/*": ["lib/*"],
+      "@middlewares/*": ["middlewares/*"],
+      "@models/*": ["models/*"]
     }
   },
   "exclude": ["node_modules"]
