@@ -2,6 +2,7 @@ import 'dotenv/config';
 import { Elysia } from 'elysia';
 import config from '@/config';
 import logger from '@lib/logger';
+import { swagger } from '@elysiajs/swagger'
 
 import requestLogger from '@lib/plugins/requestLogger';
 
@@ -14,16 +15,25 @@ global.cambusa = {
 // Create a new Elysia app instance
 const app = new Elysia();
 
-cambusa.log.info('Starting Cambusa server...');
+cambusa.log.info('🚣 Starting Cambusa server...');
 
 // Conditionally apply request logging middleware based on configuration
 if (cambusa.config.logger?.logRequests) {
   app.use(requestLogger);
 }
 
+// Conditionally enable swagger documentation
+if (cambusa.config.swagger?.enabled) {
+  app.use(swagger(cambusa.config.swagger));
+}
+
+cambusa.log.info('⚙️  Plugins loaded.');
+
 // Load routes from the lib directory
 import loadRoutes from '@lib/routesLoader.js';
 await loadRoutes(app);
+
+cambusa.log.info('🗺️  Routes loaded.');
 
 // Start the server
 const { host, port } = cambusa.config.server;

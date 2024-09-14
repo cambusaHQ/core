@@ -210,6 +210,10 @@ export async function createUser({ request, response }) {
 }
 ```
 
+## Swagger documentation
+
+Cambusa dynamically generates a swagger api documentation at `/swagger` if enabled in config.
+
 ## Logging
 
 Cambusa uses [Pino](https://github.com/pinojs/pino) for fast, structured logging. The logger is available globally as cambusa.log, and its configuration can be customized per environment.
