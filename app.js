@@ -2,9 +2,10 @@ import 'dotenv/config';
 import { Elysia } from 'elysia';
 import config from '@/config';
 import logger from '@lib/logger';
-import { swagger } from '@elysiajs/swagger'
+import { swagger } from '@elysiajs/swagger';
+import { cors } from '@elysiajs/cors';
 
-import requestLogger from '@lib/plugins/requestLogger';
+import requestLogger from '@lib/middlewares/requestLogger';
 
 // Initialize the global cambusa object
 global.cambusa = {
@@ -26,6 +27,9 @@ if (cambusa.config.logger?.logRequests) {
 if (cambusa.config.swagger?.enabled) {
   app.use(swagger(cambusa.config.swagger));
 }
+
+// Cors
+app.use(cors(cambusa.config.security.cors));
 
 cambusa.log.info('⚙️  Plugins loaded.');
 
