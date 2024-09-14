@@ -1,6 +1,6 @@
 export default {
   routes: {
-    'GET /users': 'UserController.getUsers',
-    'POST /users': 'UserController.createUser',
+    'GET /users': 'users/list',
+    'DELETE /users/:id': 'users/delete',
   },
 };
