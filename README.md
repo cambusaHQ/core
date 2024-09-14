@@ -213,11 +213,25 @@ export async function getUsers({ request, response }) {
 
 ## Database Setup
 
-The project uses TypeORM with better-sqlite3 as the default database provider. You can easily switch to another provider by updating the `config/datastore.js`.
+The project uses TypeORM with better-sqlite3 as the default database provider. However, you can easily switch to any supported relational database (e.g., PostgreSQL, MySQL, MariaDB, SQLite) by updating the `config/datastore.js`.
+
+## Supported Databases
+
+You can configure the project to use one of the supported databases:
+
+- PostgreSQL
+- MySQL
+- MariaDB
+- SQLite
+- MongoDB
+- Oracle
+- MS SQL
 
 ### Configuration
 
 Update the `config/datastore.js` file to define the database connection:
+
+Example with sqlite:
 
 ```js
 export default {
@@ -228,9 +242,21 @@ export default {
 };
 ```
 
+Example with PostgreSQL:
+
+```js
+export default {
+  database: {
+    provider: 'postgres',  // Example: Switch to PostgreSQL
+    url: 'postgresql://username:password@localhost:5432/mydb',  // Database connection URL
+  },
+};
+```
+
+Simply replace `provider` with the desired database type, and adjust the `url` to match your database connection string. TypeORM will automatically load the appropriate driver.
+
 ### Loading Models
-M
-odels are automatically loaded from the `models/` directory. Each model is defined using TypeORM's EntitySchema.
+Models are automatically loaded from the `models/` directory. Each model is defined using TypeORM's EntitySchema.
 
 **Example:** `models/User.js`
 
