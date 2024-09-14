@@ -20,5 +20,12 @@
 
 ### Chores
 
-* base structure ([c46270d](https://github.com/enricodeleo/cambusa/commit/c46270de0a087a16fb9654438febce5136cfd6d7))
 * release versions ([bfd92e0](https://github.com/enricodeleo/cambusa/commit/bfd92e08146e84a0d57bd15d4f62a6689282a511))
+
+
+## 0.0.1 (2024-09-14)
+
+
+### Chores
+
+* base structure ([c46270d](https://github.com/enricodeleo/cambusa/commit/c46270de0a087a16fb9654438febce5136cfd6d7))

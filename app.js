@@ -2,10 +2,6 @@ import 'dotenv/config';
 import { Elysia } from 'elysia';
 import config from '@/config';
 import logger from '@lib/logger';
-import { swagger } from '@elysiajs/swagger';
-import { cors } from '@elysiajs/cors';
-
-import requestLogger from '@lib/middlewares/requestLogger';
 
 // Initialize the global cambusa object
 global.cambusa = {
@@ -18,20 +14,11 @@ const app = new Elysia();
 
 cambusa.log.info('🚣 Starting Cambusa server...');
 
-// Conditionally apply request logging middleware based on configuration
-if (cambusa.config.logger?.logRequests) {
-  app.use(requestLogger);
-}
+// Dynamically load and apply middlewares
+import loadMiddlewares from '@lib/middlewaresLoader';
+await loadMiddlewares(app);
 
-// Conditionally enable swagger documentation
-if (cambusa.config.swagger?.enabled) {
-  app.use(swagger(cambusa.config.swagger));
-}
-
-// Cors
-app.use(cors(cambusa.config.security.cors));
-
-cambusa.log.info('⚙️  Plugins loaded.');
+cambusa.log.info('⚙️  Middlewares loaded.');
 
 // Load routes from the lib directory
 import loadRoutes from '@lib/routesLoader.js';
