@@ -60,6 +60,10 @@ cambusa-app/
 │       └── test.js
 ├── lib/
 │   └── routesLoader.js
+├── middlewares/
+│   └── cors.js
+│   └── requestLogger.js
+│   └── swagger.js
 ├── app.js
 ├── package.json
 └── bunfig.toml

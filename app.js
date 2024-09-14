@@ -12,7 +12,19 @@ global.cambusa = {
 // Create a new Elysia app instance
 const app = new Elysia();
 
-cambusa.log.info('🚣 Starting Cambusa server...');
+// Function to print the welcome banner
+function printWelcomeBanner({ host, port }) {
+  console.log(`
+************************************************************
+*                                                          *
+*                    Welcome to Cambusa 🚣                 *
+*           Your modern framework for smooth sailing       *
+*                                                          *
+*                  Running at ${host}:${port}                 *
+*                                                          *
+************************************************************
+  `.trim());
+}
 
 // Dynamically load and apply middlewares
 import loadMiddlewares from '@lib/middlewaresLoader';
@@ -33,7 +45,7 @@ app.listen({
   port: normalizedPort,
   hostname: host,
  }, () => {
-  logger.info(`Cambusa server running at http://${host}:${port} in ${config.env} mode`);
+  printWelcomeBanner({ host, port }); // Print the welcome banner
 });
 
 // Global errors
