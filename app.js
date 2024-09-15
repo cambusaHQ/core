@@ -13,10 +13,21 @@ import config from '@/config';
 const cambusa = global.cambusa = { config };
 
 // Create a new Elysia app instance
-cambusa.app = new Elysia().decorate('cambusa', cambusa);
+cambusa.app = new Elysia().decorate('cambusa', cambusa)
+  .on('start', () => {
+    cambusa.log.debug('Cambusa started!');
+  })
+  .on('stop', () => {
+    console.log('Cambusa got a stop event.');
+  });
 
 // Inject logger
 cambusa.log = logger(cambusa);
+
+// Global errors
+cambusa.app.on('error', (error) => {
+  cambusa.log.error(`Unhandled error: ${error.message}`);
+});
 
 // Dynamically load and apply middlewares
 await loadMiddlewares();
@@ -31,7 +42,6 @@ cambusa.log.info('📚  Database initialized.');
 await loadRoutes();
 cambusa.log.info('🗺️  Routes loaded.');
 
-
 // Start the server
 const { host, port } = cambusa.config.server;
 const normalizedPort = parseInt(port, 10);
@@ -40,9 +50,4 @@ cambusa.app.listen({
   hostname: host,
  }, () => {
   welcomeBanner({ host, port }); // Print the welcome banner
-});
-
-// Global errors
-cambusa.app.on('error', (err) => {
-  logger.error(`Unhandled error: ${err.message}`, err);
 });
