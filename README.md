@@ -42,33 +42,21 @@ bun install
 
 ```bash
 cambusa-app/
-├── api/
-│   └── controllers/
-│       └── root.js
-│       └── users/
-│           └── create.js
-│           └── delete.js
-│           └── read.js
-│           └── update.js
-├── config/
-│   ├── index.js
-│   ├── routes.js
-│   ├── server.js
-│   └── env/
-│       ├── development.js
-│       ├── production.js
-│       └── test.js
-├── lib/
-│   └── routesLoader.js
-├── middlewares/
-│   └── cors.js
-│   └── requestLogger.js
-│   └── swagger.js
-├── models/
-│   └── User.js
+├── api
+│   ├── controllers
+│   ├── helpers
+│   ├── middlewares
+│   └── models
 ├── app.js
-├── package.json
-└── bunfig.toml
+├── config
+│   ├── database.js
+│   ├── index.js
+│   ├── logger.js
+│   ├── middlewares.js
+│   ├── routes.js
+│   ├── security.js
+│   ├── server.js
+│   └── swagger.js
 ```
 
 ### Run
@@ -178,6 +166,36 @@ bun run app.js --server.port=8080
 
 This command will set server.port to `8080`.
 
+## The `cambusa` Global Object
+
+The `cambusa` global object is a central part of the Cambusa framework, providing access to various components and utilities throughout your application.
+
+### Key Properties and Methods
+
+- `cambusa.config`: Contains all configuration settings for your application.
+- `cambusa.app`: The main Elysia application instance.
+- `cambusa.log`: The Pino logger instance for logging.
+- `cambusa.db`: The TypeORM DataSource instance for database operations.
+- `cambusa.helpers`: Contains all loaded helper functions.
+
+Example Usage:
+
+```js
+// Accessing configuration
+const serverPort = cambusa.config.server.port;
+
+// Logging
+cambusa.log.info('Application started');
+
+// Database operations
+const users = await cambusa.db.getRepository('User').find();
+
+// Using a helper
+const formattedDate = cambusa.helpers.formatDate(new Date());
+```
+
+The `cambusa` object is automatically available in your controllers, models, and other parts of your application, allowing easy access to core functionalities without the need for manual imports.
+
 ## Creating Routes and Controllers
 
 ### Defining Routes
@@ -209,6 +227,65 @@ export async function getUsers({ request, response }) {
     { id: 2, name: 'Bob' },
   ];
 }
+```
+
+## Middleware System
+Cambusa uses a flexible middleware system that allows you to easily add functionality to your application's request/response cycle.
+
+### Configuring Middlewares
+
+Middlewares are configured in your application's configuration files. You can specify the order in which middlewares should be applied:
+
+```js
+// config/middlewares.js
+export default {
+  middlewares: ['cors', 'requestLogger', 'swagger'],
+};
+```
+
+### Creating Custom Middlewares
+
+To create a custom middleware, add a new file in the api/middlewares/ directory. Each middleware should export a default function that returns an Elysia plugin.
+
+**Example** `api/middlewares/cors.js`
+
+```js
+// Cors support
+import { Elysia } from 'elysia';
+import { cors } from '@elysiajs/cors';
+
+const plugin =  new Elysia({
+    name: 'cors',
+  })
+  .use(cors(cambusa.config.security.cors));
+
+export default plugin;
+```
+
+Cambusa will automatically load and apply middlewares based on the order specified in your configuration.
+
+### Helpers
+
+Helpers in Cambusa are utility functions that can be used across your application. They are automatically loaded and made available globally.
+
+### Creating Helpers
+
+To create a helper, add a new file in the `api/helpers/` directory. Each helper should export a default function.
+
+**Example** `api/helpers/formatDate.js`
+
+```js
+export default function (date) {
+  return date.toISOString().split('T')[0];
+}
+```
+
+### Using Helpers
+
+Helpers are available globally through the `cambusa.helpers` object:
+
+```js
+const formattedDate = cambusa.helpers.formatDate(new Date());
 ```
 
 ## Database Setup
@@ -256,9 +333,9 @@ export default {
 Simply replace `provider` with the desired database type, and adjust the `url` to match your database connection string. TypeORM will automatically load the appropriate driver.
 
 ### Loading Models
-Models are automatically loaded from the `models/` directory. Each model is defined using TypeORM's EntitySchema.
+Models are automatically loaded from the `api/models/` directory. Each model is defined using TypeORM's EntitySchema.
 
-**Example:** `models/User.js`
+**Example:** `api/models/User.js`
 
 ```js
 export const User = {
