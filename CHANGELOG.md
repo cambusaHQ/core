@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.0.5](https://github.com/enricodeleo/cambusa/compare/0.0.4...0.0.5) (2024-09-15)
+
+
+### Features
+
+* **app.js:** enhance Elysia app with start/stop event logging and global error handling ([153a16f](https://github.com/enricodeleo/cambusa/commit/153a16f08a6f73d844380bf4f587aa50613e9158))
+* introduce helper functions and their dynamic loader for scalability ([64d0a09](https://github.com/enricodeleo/cambusa/commit/64d0a0991ecc9cd3001b6f17607d02c785ef9dec))
+
+
+### Chores
+
+* ignore lock file ([f019172](https://github.com/enricodeleo/cambusa/commit/f01917231167a8fd3931762bc2c0d3c7df6df04d))
+
 ## [0.0.4](https://github.com/enricodeleo/cambusa/compare/0.0.3...0.0.4) (2024-09-14)
 
 
