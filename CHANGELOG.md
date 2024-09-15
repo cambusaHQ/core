@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.0.6](https://github.com/enricodeleo/cambusa/compare/0.0.5...0.0.6) (2024-09-15)
+
+
+### Features
+
+* add ping helper, CORS, requestLogger, swagger middlewares, and User model ([8482994](https://github.com/enricodeleo/cambusa/commit/8482994c9ea4c28be5a1591eb6399947bd1e1602))
+
+
+### Documentation
+
+* update readme ([adbdc5a](https://github.com/enricodeleo/cambusa/commit/adbdc5a3925ae4ea89aeb4558ac9b9886e2a548d))
+
 ## [0.0.5](https://github.com/enricodeleo/cambusa/compare/0.0.4...0.0.5) (2024-09-15)
 
 
