@@ -3,6 +3,7 @@ import { Elysia } from 'elysia';
 
 import loadMiddlewares from '@lib/middlewaresLoader';
 import loadRoutes from '@lib/routesLoader.js';
+import loadHelpers from '@lib/helpersLoader';
 import datastore from '@lib/datastore.js';
 import logger from '@lib/logger';
 import welcomeBanner from '@lib/welcomeBanner';
@@ -41,6 +42,10 @@ cambusa.log.info('📚  Database initialized.');
 // Load routes from the lib directory
 await loadRoutes();
 cambusa.log.info('🗺️  Routes loaded.');
+
+// Load helpers
+cambusa.helpers = await loadHelpers();
+cambusa.log.info('💁‍♂️  Helpers loaded.');
 
 // Start the server
 const { host, port } = cambusa.config.server;
