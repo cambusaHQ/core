@@ -24,6 +24,7 @@
     "minimist": "^1.2.8",
     "pino": "^9.4.0",
     "pino-pretty": "^11.2.2",
+    "pluralize": "^8.0.0",
     "reflect-metadata": "^0.2.2",
     "sqlite3": "^5.1.7",
     "typeorm": "^0.3.20"

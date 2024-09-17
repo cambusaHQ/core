@@ -4,7 +4,7 @@ import { Elysia } from 'elysia';
 import loadMiddlewares from '@lib/middlewaresLoader';
 import loadRoutes from '@lib/routesLoader.js';
 import loadHelpers from '@lib/helpersLoader';
-import datastore from '@lib/datastore.js';
+import datastore from '@lib/datastore/datastore.js';
 import logger from '@lib/logger';
 import welcomeBanner from '@lib/welcomeBanner';
 

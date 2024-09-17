@@ -1,13 +1,9 @@
 export const User = {
-  name: 'User',
-  tableName: 'users',
   columns: {
-    id: {
-      primary: true,
-      type: 'int',
-      generated: true,
+    firstName: {
+      type: 'varchar',
     },
-    name: {
+    lastName: {
       type: 'varchar',
     },
     email: {

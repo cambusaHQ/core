@@ -339,6 +339,19 @@ Models are automatically loaded from the `api/models/` directory. Each model is 
 
 ```js
 export const User = {
+  columns: {
+    name: { type: 'varchar' },
+    email: { type: 'varchar', unique: true },
+  },
+};
+
+export default User;
+```
+
+**The model name, table name and primary id are automatically generated for you.** In case you need to override the default values you can add them explicitly in the model definition:
+
+```js
+export const User = {
   name: 'User',
   tableName: 'users',
   columns: {
