@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.1.0](https://github.com/enricodeleo/cambusa/compare/0.0.9...0.1.0) (2024-09-18)
+
+
+### Features
+
+* **README.md:** enhance documentation on routes, controllers, and introduce blueprints for automatic CRUD operations ([9ebf84a](https://github.com/enricodeleo/cambusa/commit/9ebf84af123c755dfb6b8846564af3d0a3df371d))
+
+
+### Code Refactoring
+
+* **lib:** streamline route and blueprint loading with clearer naming ([918be0a](https://github.com/enricodeleo/cambusa/commit/918be0a0b958a34d3e89a8b92398854ac88fc491))
+
 ## [0.0.9](https://github.com/enricodeleo/cambusa/compare/0.0.8...0.0.9) (2024-09-18)
 
 
