@@ -165,81 +165,13 @@ Helpers are available globally through the `cambusa.helpers` object:
 const formattedDate = cambusa.helpers.formatDate(new Date());
 ```
 
-## Database Setup
+## Models
 
-The project uses TypeORM and you can configure the database used (e.g., PostgreSQL, MySQL, MariaDB, SQLite) by updating the `config/datastore.js`.
+Models in `api/models/` will automatically be available as `cambusa.models.ModelName`, for example `User` model will be available as `cambusa.models.User`.
 
-## Supported Databases
+Cambusa uses **TypeORM** and you can configure the database used (e.g., PostgreSQL, MySQL, MariaDB, SQLite) by updating the `config/datastore.js`.
 
-You can configure the project to use one of the supported databases:
-
-- PostgreSQL
-- MySQL
-- MariaDB
-- SQLite
-- MongoDB
-- Oracle
-- MS SQL
-
-### Configuration
-
-Update the `config/datastore.js` file to define the database connection:
-
-Example with sqlite:
-
-```js
-export default {
-  database: {
-    provider: 'sqlite',
-    url: './database.sqlite',
-  },
-};
-```
-
-Example with PostgreSQL:
-
-```js
-export default {
-  database: {
-    provider: 'postgres',  // Example: Switch to PostgreSQL
-    url: 'postgresql://username:password@localhost:5432/mydb',  // Database connection URL
-  },
-};
-```
-
-Simply replace `provider` with the desired database type, and adjust the `url` to match your database connection string. TypeORM will automatically load the appropriate driver.
-
-### Loading Models
-Models are automatically loaded from the `api/models/` directory. Each model is defined using TypeORM's EntitySchema.
-
-**Example:** `api/models/User.js`
-
-```js
-export const User = {
-  columns: {
-    name: { type: 'varchar' },
-    email: { type: 'varchar', unique: true },
-  },
-};
-
-export default User;
-```
-
-**The model name, table name and primary id are automatically generated for you.** In case you need to override the default values you can add them explicitly in the model definition:
-
-```js
-export const User = {
-  name: 'User',
-  tableName: 'users',
-  columns: {
-    id: { primary: true, type: 'int', generated: true },
-    name: { type: 'varchar' },
-    email: { type: 'varchar', unique: true },
-  },
-};
-
-export default User;
-```
+[🔗 Database documentation](./docs/DATABASE.md)
 
 ## Swagger documentation
 
