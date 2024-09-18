@@ -194,7 +194,7 @@ In cases where a route is defined both in your custom `config/routes.js` and is 
 
 For example, if you define a custom `GET /users/:id` route in `config/routes.js`, it will override the blueprint route for that path, allowing you to fully control the behavior of that route.
 
-### Query Parameters for Blueprints
+### Query Parameters for Blueprints
 
 Blueprints support several query parameters that allow developers to paginate, filter, and sort the returned data in `GET` requests.
 
