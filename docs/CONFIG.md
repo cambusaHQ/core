@@ -70,6 +70,8 @@ Will dynamically result in the following configuration:
 - **Double underscores** (`__`): Used to represent nested keys in the configuration. For example, `CAMBUSA__SERVER__HOST` maps to `server.host`.
 - **Automatic Type Conversion**: As with other configuration sources, environment variables are automatically converted to the appropriate types (e.g., booleans, numbers).
 
+**Environment variables can also be added to a `.env` file.**
+
 ### User-Specific Configurations
 
 You can add user-specific configurations in a file located in your home directory: `~/.cambusa/config.js`. These configurations will automatically be merged into the application's configuration.

@@ -1,8 +1,7 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
-.env
-
 # Env specific
+.env
 config/custom.js
 .cambusa
 database.sqlite
