@@ -1,7 +1,7 @@
-export const User = {
+export const Comment = {
   routes: {
-    disabled: ['delete'], // Disable the DELETE endpoint for User
-    basePath: '/users',   // Custom base path
+    // disabled: ['delete'], // Disable the DELETE endpoint for User
+    // basePath: '/users',   // Custom base path
   },
   columns: {
     firstName: {
@@ -19,4 +19,4 @@ export const User = {
   },
 };
 
-export default User;
+export default Comment;
