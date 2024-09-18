@@ -1,5 +1,26 @@
 # Changelog
 
+## [0.0.7](https://github.com/enricodeleo/cambusa/compare/0.0.6...0.0.7) (2024-09-18)
+
+
+### Features
+
+* enhance model definition and datastore integration ([384bf76](https://github.com/enricodeleo/cambusa/commit/384bf7670ce23dbcefe5a006718e53f49e5334e7))
+
+
+### Code Refactoring
+
+* **api/controllers/users/create.js:** implement transactional user creation with proper error handling and logging ([1c085b2](https://github.com/enricodeleo/cambusa/commit/1c085b2974b3281030aed4c74e7f5f38109fbfc2))
+* **api/controllers/users/list.js, lib/cambusa.js:** streamline user model access using Proxy ([97ea5fb](https://github.com/enricodeleo/cambusa/commit/97ea5fbec0456f4c6a022fab25079347701d5af4))
+* encapsulate initialization and loading logic in Cambusa class ([c68e618](https://github.com/enricodeleo/cambusa/commit/c68e618d8288b73a8651963e02d7746f25c2469a))
+
+
+### Chores
+
+* streamline project setup and configuration management ([9c3897d](https://github.com/enricodeleo/cambusa/commit/9c3897d0639ad604a0d8878596d902d11b1b5b8e))
+* update .gitignore to exclude .data directory ([de178bf](https://github.com/enricodeleo/cambusa/commit/de178bf1d8b1a8810220311d8d66260978955078))
+* vs code debug ([5522024](https://github.com/enricodeleo/cambusa/commit/5522024ffb7c21e27acffc7eb492481e216adad8))
+
 ## [0.0.6](https://github.com/enricodeleo/cambusa/compare/0.0.5...0.0.6) (2024-09-15)
 
 
