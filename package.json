@@ -33,8 +33,5 @@
   "devDependencies": {
     "@release-it/conventional-changelog": "^8.0.2",
     "release-it": "^17.6.0"
-  },
-  "trustedDependencies": [
-    "better-sqlite3"
-  ]
+  }
 }
