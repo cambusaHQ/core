@@ -192,8 +192,10 @@ export default {
   relations: {
     author: {
       type: 'many-to-one',
-      target: 'User',
-      inverseSide: 'posts',
+      target: 'User',       // The target entity is the User model
+      inverseSide: 'posts', // Reference to the 'posts' property in the User model
+      joinColumn: { name: 'userId' },  // The foreign key column in the Post table
+      onDelete: 'CASCADE',  // If a user is deleted, the posts are also deleted
     },
   },
 };

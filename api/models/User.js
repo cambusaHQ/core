@@ -27,4 +27,11 @@ export default {
       type: 'date',
     },
   },
+  relations: {
+    orders: {
+      target: 'Order',
+      type: 'one-to-many',
+      inverseSide: 'user',
+    },
+  },
 };

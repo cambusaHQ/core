@@ -14,21 +14,20 @@ export default {
       type: 'string',
     },
     metadata: {
-      type: 'json', // Store additional data dynamically
+      type: 'json',
+      nullable: true,
     },
   },
   relations: {
     user: {
-      type: 'many-to-one',
       target: 'User',
-      joinColumn: { name: 'userId' },
-      onDelete: 'SET NULL',
-    },
-    product: {
       type: 'many-to-one',
-      target: 'Product',
-      joinColumn: { name: 'productId' },
-      onDelete: 'SET NULL',
+      inverseSide: 'orders',
+    },
+    orderItems: {
+      target: 'OrderItem',
+      type: 'one-to-many',
+      inverseSide: 'order',
     },
   },
 };

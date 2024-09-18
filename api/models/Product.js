@@ -18,11 +18,16 @@ export default {
     },
   },
   relations: {
-    owner: {
-      type: 'many-to-one',
-      target: 'User', // Reference to User entity
-      joinColumn: { name: 'ownerId' }, // Foreign key column in Product
-      onDelete: 'CASCADE',
+    categories: {
+      target: 'Category',
+      type: 'many-to-many',
+      joinTable: true,
+      cascade: true,
+    },
+    orderItems: {
+      target: 'OrderItem',
+      type: 'one-to-many',
+      inverseSide: 'product',
     },
   },
 };

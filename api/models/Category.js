@@ -9,13 +9,4 @@ export default {
       nullable: true,
     },
   },
-  relations: {
-    parent: {
-      type: 'many-to-one',
-      target: 'Category', // Self-referential relation
-      joinColumn: { name: 'parentId' },
-      nullable: true,
-      onDelete: 'SET NULL',
-    },
-  },
 };
