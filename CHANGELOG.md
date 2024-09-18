@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.0.8](https://github.com/enricodeleo/cambusa/compare/0.0.7...0.0.8) (2024-09-18)
+
+
+### Features
+
+* **api/models:** add Comment model for handling comments data ([f329dae](https://github.com/enricodeleo/cambusa/commit/f329dae8b955533bee5df12ac23a686397984841))
+* **docs, datastore:** enhance model documentation and automate timestamps ([32b3d32](https://github.com/enricodeleo/cambusa/commit/32b3d3278825d9b3a437a0e2a56f610bdaec2cfc))
+* streamline user creation flow and enhance localization support ([a4eb16f](https://github.com/enricodeleo/cambusa/commit/a4eb16fd2fa668dec494127d705ba32b7ce7d3b2))
+
+
+### Documentation
+
+* update readme ([33adfa3](https://github.com/enricodeleo/cambusa/commit/33adfa3a32a29137b26f505d6291acc0ea40d460))
+
 ## [0.0.7](https://github.com/enricodeleo/cambusa/compare/0.0.6...0.0.7) (2024-09-18)
 
 
