@@ -9,7 +9,7 @@
   "type": "module",
   "module": "app.js",
   "engines": {
-    "bun": ">= 1.1.0"
+    "bun": ">= 1.1.28"
   },
   "scripts": {
     "start": "bun run app.js",
