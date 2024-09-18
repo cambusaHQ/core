@@ -1,8 +1,4 @@
 export const Comment = {
-  routes: {
-    // disabled: ['delete'], // Disable the DELETE endpoint for User
-    // basePath: '/users',   // Custom base path
-  },
   columns: {
     firstName: {
       type: 'varchar',

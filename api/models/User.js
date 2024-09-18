@@ -1,7 +1,6 @@
 export const User = {
   routes: {
-    disabled: ['delete'], // Disable the DELETE endpoint for User
-    basePath: '/users',   // Custom base path
+    disabled: [], // possible values: readAll, readOne, create, update, delete or true to disable them all
   },
   columns: {
     firstName: {
