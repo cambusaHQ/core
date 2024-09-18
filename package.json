@@ -19,6 +19,7 @@
   "dependencies": {
     "@elysiajs/cors": "^1.1.1",
     "@elysiajs/swagger": "^1.1.1",
+    "better-sqlite3": "^11.3.0",
     "boolean": "^3.2.0",
     "dotenv": "^16.4.5",
     "elysia": "latest",
@@ -26,7 +27,6 @@
     "pino": "^9.4.0",
     "pino-pretty": "^11.2.2",
     "pluralize": "^8.0.0",
-    "sqlite3": "^5.1.7",
     "typeorm": "^0.3.20"
   },
   "devDependencies": {
@@ -34,6 +34,6 @@
     "release-it": "^17.6.0"
   },
   "trustedDependencies": [
-    "sqlite3"
+    "better-sqlite3"
   ]
 }

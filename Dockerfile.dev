@@ -8,6 +8,3 @@ WORKDIR /app
 
 # Expose the port that the app will run on
 EXPOSE 3000
-
-# Use the dev script from package.json (supports hot-reloading)
-CMD ["bun", "dev"]

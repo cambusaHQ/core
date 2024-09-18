@@ -10,10 +10,10 @@ services:
       - "3000:3000"
     volumes:
       - .:/app
+      - /app/node_modules
     environment:
       - NODE_ENV=development
-    command: >
-      sh -c "bun install && bun dev"
+    command: /bin/sh -c "cd /app; bun install && bun run dev"
 
   db:
     image: postgres:16-alpine
