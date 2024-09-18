@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.9](https://github.com/enricodeleo/cambusa/compare/0.0.8...0.0.9) (2024-09-18)
+
+
+### Chores
+
+* keep controllers clean ([1f2b92a](https://github.com/enricodeleo/cambusa/commit/1f2b92a570db371cbfae2bbf91dcd078ade79357))
+
 ## [0.0.8](https://github.com/enricodeleo/cambusa/compare/0.0.7...0.0.8) (2024-09-18)
 
 
