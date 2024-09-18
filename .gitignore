@@ -6,6 +6,7 @@
 config/custom.js
 .cambusa
 database.sqlite
+.data
 
 # dependencies
 /node_modules
