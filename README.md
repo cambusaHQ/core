@@ -45,6 +45,7 @@ cambusa-app/
 ├── api
 │   ├── controllers
 │   ├── helpers
+│   ├── hooks
 │   ├── middlewares
 │   └── models
 ├── app.js

@@ -45,21 +45,158 @@ The configuration should follow the TypeORM's [Data Source Options](https://orkh
 ### Loading Models
 Models are automatically loaded from the `api/models/` directory. Each model is defined by exporting a default object that specifies the model's schema using TypeORM's EntitySchema format.
 
-### Model Definition
+### Model Definition and Types
 
-A basic model definition looks like this:
+Cambusa provides support for defining models using a set of common types that map to various database-specific column types. You can define your models in the `api/models` directory.
+
+#### Supported Types
+
+Here are the predefined types you can use when defining columns in your models:
+
+- **string**: Maps to a short string field (e.g., varchar(255) in MySQL, text in PostgreSQL).
+- **text**: Maps to the longest possible text field for the target database (e.g., longtext in MySQL, clob in Oracle).
+- **integer**: Maps to an integer type (e.g., int in MySQL, integer in PostgreSQL).
+- **boolean**: Maps to a boolean value (e.g., tinyint(1) in MySQL, boolean in PostgreSQL).
+- **date**: Maps to a date/time field (e.g., timestamp with time zone in PostgreSQL, datetime in MySQL).
+- **decimal**: Maps to a decimal type for precise numeric values (e.g., decimal in MySQL, numeric in PostgreSQL).
+- **json**: Maps to a JSON field (e.g., jsonb in PostgreSQL, json in MySQL).
+- **uuid**: Maps to a UUID type (e.g., uuid in PostgreSQL, char(36) in MySQL).
+
+#### Defining Columns with Types
+
+Each column in a model can be defined with one of the above types. Here’s an example of defining various column types in a User model:
 
 **Example:** `api/models/User.js`
 
 ```js
-export const User = {
+export default {
   columns: {
-    name: { type: 'varchar' },
-    email: { type: 'varchar', unique: true },
+    firstName: {
+      type: 'string',
+      nullable: true,
+    },
+    lastName: {
+      type: 'string',
+      nullable: true,
+    },
+    email: {
+      type: 'string',
+      unique: true,
+    },
+    age: {
+      type: 'integer',
+      nullable: true,
+    },
+    isActive: {
+      type: 'boolean',
+      default: true,
+    },
   },
 };
+```
 
-export default User;
+#### Native types
+
+You can optionally specify a `nativeType` for more control over a specific database, if needed. In this case you must use `ref` as `type`.
+
+```js
+export default {
+  columns: {
+    name: {
+      type: 'string',
+      unique: true,
+    },
+    ownerId: {
+      type: 'ref',
+      nativeType: 'bigint',  // Optional: specify native type for the foreign key
+    },
+  },
+};
+```
+
+#### Relations
+
+Define relationships (e.g., `one-to-many`, `many-to-one`, `many-to-many`, `one-to-one`) in the `relations` property of your model. These relationships connect models together and are required for associations like joining tables or referencing foreign keys.
+
+**Example**: **many-to-one** relationship
+
+```js
+export default {
+  columns: {
+    orderNumber: {
+      type: 'string',
+      unique: true,
+    },
+    totalAmount: {
+      type: 'decimal',
+    },
+  },
+  relations: {
+    user: {
+      type: 'many-to-one',
+      target: 'User',  // References the User model
+      joinColumn: { name: 'userId' },
+      onDelete: 'SET NULL',
+    },
+  },
+};
+```
+
+**Example** of self-referential relations
+
+```js
+export default {
+  columns: {
+    name: {
+      type: 'string',
+      unique: true,
+    },
+  },
+  relations: {
+    parent: {
+      type: 'many-to-one',
+      target: 'Category',  // Self-referential relation
+      joinColumn: { name: 'parentId' },
+      onDelete: 'SET NULL',
+    },
+  },
+};
+```
+
+**Example** of bi-directional relations
+
+`api/models/User.js`
+
+```js
+export default {
+  columns: {
+    // columns definition
+  },
+  relations: {
+    posts: {
+      type: 'one-to-many',
+      target: 'Post',
+      inverseSide: 'author',
+    },
+  },
+};
+```
+
+`api/models/Post.js`
+
+```js
+export default {
+  columns: {
+    // columns definition
+  },
+  relations: {
+    author: {
+      type: 'many-to-one',
+      target: 'User',
+      inverseSide: 'posts',
+    },
+  },
+};
 ```
 
 ### Automatic Features
@@ -78,33 +215,26 @@ You can override any of the automatic features by specifying them in your model 
 #### Example with Custom Model Name and Table Name:
 
 ```js
-export const User = {
+export default {
   name: 'UserProfile', // Custom model name
   tableName: 'user_profiles', // Custom table name
   columns: {
-    name: { type: 'varchar' },
-    email: { type: 'varchar', unique: true },
+    // columns definition
   },
 };
-
-export default User;
 ```
 
 #### Example Disabling Automatic Primary Key and Timestamps:
 
 ```js
-export const User = {
+export default {
   primaryKey: false, // Disable automatic primary key
   createdAt: false,  // Disable automatic createdAt column
   updatedAt: false,  // Disable automatic updatedAt column
   columns: {
-    customId: { primary: true, type: 'uuid', generated: 'uuid' },
-    name: { type: 'varchar' },
-    email: { type: 'varchar', unique: true },
+    // columns definition
   },
 };
-
-export default User;
 ```
 
 In the above example, we:
@@ -129,48 +259,6 @@ const newUser = cambusa.models.User.create({
 });
 
 await cambusa.models.User.save(newUser);
-```
-
-### Defining Relationships
-
-You can define relationships between models using TypeORM's relation definitions.
-
-#### Example with Relations:
-
-`api/models/User.js`
-
-```js
-export default {
-  columns: {
-    name: { type: 'varchar' },
-    email: { type: 'varchar', unique: true },
-  },
-  relations: {
-    posts: {
-      type: 'one-to-many',
-      target: 'Post',
-      inverseSide: 'author',
-    },
-  },
-};
-```
-
-`api/models/Post.js`
-
-```js
-export default {
-  columns: {
-    title: { type: 'varchar' },
-    content: { type: 'text' },
-  },
-  relations: {
-    author: {
-      type: 'many-to-one',
-      target: 'User',
-      inverseSide: 'posts',
-    },
-  },
-};
 ```
 
 **Notes**

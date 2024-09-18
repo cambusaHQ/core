@@ -1,21 +1,30 @@
-export const User = {
-  routes: {
-    disabled: [], // possible values: readAll, readOne, create, update, delete or true to disable them all
-  },
+export default {
   columns: {
     firstName: {
-      type: 'varchar',
+      type: 'string',
       nullable: true,
     },
     lastName: {
-      type: 'varchar',
+      type: 'string',
       nullable: true,
     },
     email: {
-      type: 'varchar',
+      type: 'string',
       unique: true,
+    },
+    age: {
+      type: 'integer',
+      nullable: true,
+    },
+    isActive: {
+      type: 'boolean',
+      default: true,
+    },
+    createdAt: {
+      type: 'date',
+    },
+    updatedAt: {
+      type: 'date',
     },
   },
 };
-
-export default User;
