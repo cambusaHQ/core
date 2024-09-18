@@ -141,7 +141,7 @@ export default plugin;
 
 Cambusa will automatically load and apply middlewares based on the order specified in your configuration.
 
-### Helpers
+## Helpers
 
 Helpers in Cambusa are utility functions that can be used across your application. They are automatically loaded and made available globally.
 
@@ -171,7 +171,7 @@ Models in `api/models/` will automatically be available as `cambusa.models.Model
 
 Cambusa uses **TypeORM** and you can configure the database used (e.g., PostgreSQL, MySQL, MariaDB, SQLite) by updating the `config/datastore.js`.
 
-[🔗 Database documentation](./docs/DATABASE.md)
+[🔗 Database and Models documentation](./docs/DATABASE.md)
 
 ## Swagger documentation
 

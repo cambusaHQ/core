@@ -1,13 +1,11 @@
 export default async function createUser() {
-  const userRepository = cambusa.db.getRepository('User');
-  const user = userRepository.create({
-    firstName: "Rishit",
-    lastName: "test3",
-    email: "enrico@rico.it",
-  });
+  let user;
 
   try {
-    await userRepository.insert(user);
+    user = await cambusa.models.User.save({
+      firstName: 'Alice',
+      email: 'alice@exasdsssssmple.com',
+    });
   } catch (error) {
     cambusa.log.error(`Error creating user: ${error.message}`);
   }
