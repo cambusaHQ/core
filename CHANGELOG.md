@@ -1,5 +1,32 @@
 # Changelog
 
+## [0.2.0](https://github.com/enricodeleo/cambusa/compare/0.1.0...0.2.0) (2024-09-18)
+
+
+### Features
+
+* add hooks directory, Category, Order, Product, Review models, update User model, and enhance DATABASE.md with model definition types and relations ([2d9169b](https://github.com/enricodeleo/cambusa/commit/2d9169bc62f8fd361ded1521e26800fda8ad5331))
+* **lib/datastore, lib/router:** add filtering support to blueprints and validate 'where' parameter ([4921ffe](https://github.com/enricodeleo/cambusa/commit/4921ffe83868d67e8c6d231edd58a75faf71baa6))
+* **lib/datastore:** add extractRelations.js to handle relation extraction ([43f91bd](https://github.com/enricodeleo/cambusa/commit/43f91bda2dd5c16a6c5609e55980734ccfe04a85))
+
+
+### Documentation
+
+* **README.md:** add documentation for query parameters in blueprints ([90e910d](https://github.com/enricodeleo/cambusa/commit/90e910dce1c1f881708301d931a34ab05edb06c5))
+
+
+### Code Refactoring
+
+* **blueprints.js:** enhance blueprints with sorting, fix schema typo, remove validateWhere.js ([cea7a30](https://github.com/enricodeleo/cambusa/commit/cea7a305a758a143aa38787fea72aa83cbc3581b))
+* **blueprints.js:** standardize error handling and pagination logic, improve code readability and consistency ([aa475b9](https://github.com/enricodeleo/cambusa/commit/aa475b901688667721c8795207a6e70421b2f4ac))
+* **datastore, router:** streamline relation extraction and enhance API response ([5388e33](https://github.com/enricodeleo/cambusa/commit/5388e334d100475c8668b152a8bb228aae6bcec9))
+* streamline mapTypes and enhance blueprints module documentation ([93fc59a](https://github.com/enricodeleo/cambusa/commit/93fc59a8b0528682b654566149f8dc0141c73192))
+
+
+### Chores
+
+* testing blueprints ([8618be6](https://github.com/enricodeleo/cambusa/commit/8618be69906a9877eaaad93cd8e15ab49c76152e))
+
 ## [0.1.0](https://github.com/enricodeleo/cambusa/compare/0.0.9...0.1.0) (2024-09-18)
 
 
