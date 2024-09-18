@@ -194,6 +194,62 @@ In cases where a route is defined both in your custom `config/routes.js` and is 
 
 For example, if you define a custom `GET /users/:id` route in `config/routes.js`, it will override the blueprint route for that path, allowing you to fully control the behavior of that route.
 
+### Query Parameters for Blueprints
+
+Blueprints support several query parameters that allow developers to paginate, filter, and sort the returned data in `GET` requests.
+
+#### Pagination
+
+- `limit`: Specifies the maximum number of results to return per page (default is `20`).
+- `skip`: Specifies the number of records to skip from the beginning (used for pagination).
+
+**Example**:
+
+```bash
+GET /users?limit=10&skip=20
+```
+
+This will return 10 users starting from the 21st user.
+
+**Pagination Headers:** The response will include the following pagination-related headers:
+
+- `X-Pagination-Total-Count`: Total number of records for the current query.
+- `X-Pagination-Page-Count`: Total number of pages based on the query.
+- `X-Pagination-Limit`: The `limit` used in the query.
+- `X-Pagination-Page`: The current page number.
+
+#### Sorting
+
+`sort`: Allows sorting by one or more fields. You can specify the field and the direction (`asc` for ascending or `desc` for descending) using the format `field:direction`.
+
+**Example**:
+
+```bash
+GET /users?sort=firstName:asc,lastName:desc
+```
+
+#### Filtering
+
+`where`: Allows filtering based on specific conditions. The `where` parameter should be provided as a JSON string that matches TypeORM's `find()` method syntax.
+
+**Example**:
+
+```bash
+GET /users?where={"isActive":true,"age":30}
+```
+
+This will return all active users who are 30 years old.
+
+#### Population of Related Data
+
+`populate`: Allows fetching related data by specifying relations to include. Multiple relations can be specified, separated by commas.
+
+```bash
+GET /users?populate=orders,profile
+```
+
+This will return users along with their related orders and profile information.
+
 ## Middleware System
 Cambusa uses a flexible middleware system that allows you to easily add functionality to your application's request/response cycle.
 
