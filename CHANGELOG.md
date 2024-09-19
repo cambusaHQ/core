@@ -1,5 +1,23 @@
 # Changelog
 
+## [0.3.0](https://github.com/enricodeleo/cambusa/compare/0.2.0...0.3.0) (2024-09-19)
+
+
+### Features
+
+* **lib/router:** add generateValidationSchema.js for dynamic validation schema generation ([99dd68b](https://github.com/enricodeleo/cambusa/commit/99dd68b680f0fd9cc58900cc112c71b277d9a166))
+
+
+### Documentation
+
+* fix some typo ([a1bbb6b](https://github.com/enricodeleo/cambusa/commit/a1bbb6bbad5a106e64c4d6a23fc16076255f7f4b))
+
+
+### Code Refactoring
+
+* **datastore/commonTypes.js:** standardize quotes and align elysiaType values for consistency ([42676f9](https://github.com/enricodeleo/cambusa/commit/42676f90bee3463db85118e92b4ec2c8c7b4371e))
+* new schema functions for blueprints ([1e9d6d7](https://github.com/enricodeleo/cambusa/commit/1e9d6d7c64c5f58407728e82c0345234801ed9c0))
+
 ## [0.2.0](https://github.com/enricodeleo/cambusa/compare/0.1.0...0.2.0) (2024-09-18)
 
 
