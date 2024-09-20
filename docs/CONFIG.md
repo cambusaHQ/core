@@ -98,33 +98,3 @@ bun run app.js --server.port=8080
 ```
 
 This command will set server.port to `8080`.
-
-## The `cambusa` Global Object
-
-The `cambusa` global object is a central part of the Cambusa framework, providing access to various components and utilities throughout your application.
-
-### Key Properties and Methods
-
-- `cambusa.config`: Contains all configuration settings for your application.
-- `cambusa.app`: The main Elysia application instance.
-- `cambusa.log`: The Pino logger instance for logging.
-- `cambusa.db`: The TypeORM DataSource instance for database operations.
-- `cambusa.helpers`: Contains all loaded helper functions.
-
-Example Usage:
-
-```js
-// Accessing configuration
-const serverPort = cambusa.config.server.port;
-
-// Logging
-cambusa.log.info('Application started');
-
-// Database operations
-const users = await cambusa.db.getRepository('User').find();
-
-// Using a helper
-const formattedDate = cambusa.helpers.formatDate(new Date());
-```
-
-The `cambusa` object is automatically available in your controllers, models, and other parts of your application, allowing easy access to core functionalities without the need for manual imports.

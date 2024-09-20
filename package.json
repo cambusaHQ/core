@@ -20,6 +20,7 @@
     "@elysiajs/cors": "^1.1.1",
     "@elysiajs/swagger": "^1.1.1",
     "boolean": "^3.2.0",
+    "commander": "^12.1.0",
     "dotenv": "^16.4.5",
     "elysia": "latest",
     "lodash": "^4.17.21",

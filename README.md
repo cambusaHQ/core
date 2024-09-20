@@ -74,6 +74,42 @@ Cambusa automagically supports **envirnoment variables** and **command line argu
 
 [🔗 Config documentation](./docs/CONFIG.md)
 
+
+## The `cambusa` Global Object
+
+The `cambusa` global object is a central part of the Cambusa framework, providing access to various components and utilities throughout your application.
+
+### Key Properties and Methods
+
+- `cambusa.config`: Contains all configuration settings for your application.
+- `cambusa.app`: The main Elysia application instance.
+- `cambusa.log`: The Pino logger instance for logging.
+- `cambusa.db`: The TypeORM DataSource instance for database operations.
+- `cambusa.models`: Holding all the defined models for direct operations.
+- `cambusa.helpers`: Contains all loaded helper functions.
+
+Example Usage:
+
+```js
+// Accessing configuration
+const serverPort = cambusa.config.server.port;
+
+// Logging
+cambusa.log.info('Application started');
+
+// Database
+await cambusa.db.synchronize();
+
+// Models operations
+const users = await cambusa.models.User.find();
+
+// Using a helper
+const formattedDate = cambusa.helpers.formatDate(new Date());
+```
+
+The `cambusa` object is automatically available in your controllers, models, and other parts of your application, allowing easy access to core functionalities without the need for manual imports.
+
+
 ## Creating Routes and Controllers
 
 ### Defining Routes
