@@ -42,9 +42,9 @@ The configuration should follow the TypeORM's [Data Source Options](https://orkh
 
 ## Models
 
-### Loading Models
+### Automatic Model Discovery
 
-Models are automatically loaded from the `api/models/` directory. Each model is defined by exporting a default object that specifies the model's schema using TypeORM's EntitySchema format.
+Cambusa employs an automatic model discovery mechanism. This means that you don't have to manually register or import your models elsewhere in your application. The framework automatically scans the `api/models/` directory to find and load all model definitions.
 
 ### Model Definition and Types
 
@@ -70,6 +70,8 @@ Each column in a model can be defined with one of the above types. Here’s an e
 **Example:** `api/models/User.js`
 
 ```js
+import { t } from 'elysia';
+
 export default {
   columns: {
     firstName: {
@@ -83,10 +85,12 @@ export default {
     email: {
       type: 'string',
       unique: true,
+      validation: t.String({ format: 'email' }),
     },
     age: {
       type: 'integer',
       nullable: true,
+      validation: t.Integer({ minimum: 0, maximum: 120 }),
     },
     isActive: {
       type: 'boolean',
@@ -114,6 +118,22 @@ export default {
   },
 };
 ```
+
+### Custom Validations
+
+Cambusa now supports custom validations for your model fields. You can use TypeBox validators to define more specific validation rules for your columns.
+
+To add a custom validation:
+
+1. Import `t` from Elysia at the top of your model file.
+2. Add a `validation` property to the column definition, using TypeBox validators.
+
+Examples of custom validations:
+
+- Email validation: `validation: t.String({ format: 'email' })`
+- Age range validation: `validation: t.Integer({ minimum: 0, maximum: 120 })`
+
+These custom validations will be used in the generated validation schemas, providing more specific and accurate data validation for your API endpoints.
 
 #### Relations
 
@@ -277,11 +297,20 @@ await cambusa.models.User.save(newUser);
 `api/models/Comment.js`
 
 ```js
+import { t } from 'elysia';
+
 export default {
   name: 'Comment',
   tableName: 'comments',
   columns: {
-    content: { type: 'text' },
+    content: {
+      type: 'text',
+      validation: t.String({ minLength: 1, maxLength: 1000 }),
+    },
+    rating: {
+      type: 'integer',
+      validation: t.Integer({ minimum: 1, maximum: 5 }),
+    },
   },
   relations: {
     post: {
