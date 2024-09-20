@@ -53,14 +53,14 @@ program
   .description('Generate a new model')
   .action((name) => {
     const modelTemplate = `
-export default {
-  columns: {
-    // Define your columns here
-  },
-  relations: {
-    // Define your relations here
-  },
-};
+    export default {
+      columns: {
+        // Define your columns here
+      },
+      relations: {
+        // Define your relations here
+      },
+    };
     `;
     const fileName = `${name}.js`;
     const filePath = path.join(process.cwd(), 'api', 'models', fileName);
