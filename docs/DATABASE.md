@@ -364,11 +364,6 @@ Example:
 bun run bin/cambusa.js migrations:generate UpdateUserSchema
 ```
 
-### Notes on Migration Generation
-
-- If no changes are detected, you'll see a message indicating that no new migration was generated.
-- In this case, you might want to use the `migrations:create` command instead to create an empty migration file that you can manually edit.
-
 ### Running Migrations
 
 To apply pending migrations to your database:
@@ -380,3 +375,20 @@ bun run bin/cambusa.js migrations:run
 This command will:
 - Check for any pending migrations that haven't been applied to the database.
 - Run these migrations in order, updating your database schema.
+- Display a list of successfully applied migrations.
+
+If there are no pending migrations, it will inform you that no migrations need to be run.
+
+### Notes on Migration Commands
+
+- **Creating Migrations**: Use this when you want to manually write migration steps.
+- **Generating Migrations**: Use this when you've made changes to your entity models and want to automatically create a migration based on those changes.
+- **Running Migrations**: Always run this command after creating or generating new migrations to apply the changes to your database.
+
+### Best Practices
+
+1. Always review generated migrations before applying them to ensure they match your intended changes.
+2. Keep migrations small and focused on specific changes to make them easier to review and revert if necessary.
+3. Test migrations thoroughly in a development environment before applying them to production.
+4. Use descriptive names for your migrations to easily understand what each one does.
+5. Run the `migrations:run` command as part of your deployment process to ensure your database schema is always up to date.
