@@ -45,7 +45,8 @@ function parseValue(value) {
   ) {
     try {
       return JSON.parse(trimmedValue);
-    } catch (e) {
+    } catch (error) {
+      console.error(error);
       return trimmedValue; // If JSON parsing fails, return the string as is
     }
   }
@@ -114,7 +115,7 @@ function applyEnvVariables(config, prefix = 'CAMBUSA__') {
 
 // Apply command-line arguments to the configuration
 function applyCommandLineArgs(config, argv) {
-  const { _, ...args } = argv;
+  const { _, ...args } = argv; // eslint-disable-line no-unused-vars
   deepMerge(config, args);
 }
 

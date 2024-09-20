@@ -6,8 +6,11 @@ import prettierPlugin from 'eslint-plugin-prettier';
 export default [
   {
     languageOptions: {
-      globals: globals.browser,
-      ecmaVersion: 2021, // Enable ES6/ES7+ syntax
+      globals: {
+        ...globals.node, // Existing global browser variables
+        cambusa: 'readonly', // Define cambusa as a readonly global variable
+      },
+      ecmaVersion: 2022, // Enable ES6/ES7+ syntax
       sourceType: 'module', // Use ES modules (import/export)
     },
   },

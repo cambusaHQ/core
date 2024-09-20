@@ -3,7 +3,6 @@
 import fs from 'fs';
 import path from 'path';
 import { createRequire } from 'module';
-import readline from 'readline';
 import { program } from 'commander';
 
 const require = createRequire(import.meta.url);
