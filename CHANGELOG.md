@@ -1,5 +1,21 @@
 # Changelog
 
+## [0.4.0](https://github.com/enricodeleo/cambusa/compare/0.3.0...0.4.0) (2024-09-20)
+
+
+### Features
+
+* **blueprints, generateValidationSchema:** enhance API validation and error handling ([5c3b42f](https://github.com/enricodeleo/cambusa/commit/5c3b42f8576009fe6c7240257c7b01b7ccca0f4f))
+* **generateValidationSchema.js:** add option to exclude auto-generated fields from validation schemas for more flexible schema generation ([1896445](https://github.com/enricodeleo/cambusa/commit/1896445f5b180a83ad1446ab7f84fae4f5b40252))
+* introduce Cambusa CLI with model and controller generators, route listing ([6bc3dd2](https://github.com/enricodeleo/cambusa/commit/6bc3dd2e03b7601263f3a72b4725518ddb243f95))
+
+
+### Code Refactoring
+
+* **blueprints.js, generateValidationSchema.js:** standardize single quotes for consistency ([25a779f](https://github.com/enricodeleo/cambusa/commit/25a779f6405ea65b25df523a09d10f72472283f8))
+* **datastore/commonTypes:** normalize export and string quotes for consistency ([4188ba4](https://github.com/enricodeleo/cambusa/commit/4188ba4571e6fffba0c323385adc13911d82c723))
+* **generateValidationSchema.js:** standardize quotes and improve schema generation logic ([3884f12](https://github.com/enricodeleo/cambusa/commit/3884f128bbf1f8e7554ec8a075a424f0dcc73fbb))
+
 ## [0.3.0](https://github.com/enricodeleo/cambusa/compare/0.2.0...0.3.0) (2024-09-19)
 
 
