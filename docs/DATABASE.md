@@ -392,7 +392,11 @@ bun run bin/cambusa.js migrations:run
 
 ### Database Synchronization (db:sync)
 
-Database synchronization is a feature provided by TypeORM that allows automatic synchronization of your entity models with the database schema. While it can be convenient during development, it comes with significant caveats, especially concerning data integrity and control over schema changes.
+Database synchronization is a feature provided by **TypeORM** that allows automatic synchronization of your entity models with the database schema. While it can be convenient during development, it comes with significant caveats, especially concerning data integrity and control over schema changes.
+
+```bash
+bun run bin/cambusa.js db:sync
+```
 
 #### What is db:sync?
 - **Automatic Schema Updates**: db:sync automatically generates and applies schema changes to your database based on your entity models whenever your application starts.
