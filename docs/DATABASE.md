@@ -328,67 +328,86 @@ await cambusa.models.Comment.save(comment);
 
 Cambusa provides commands to manage database migrations, allowing you to version control your database schema changes.
 
-### Creating a Migration
+### What are Migrations?
 
-To create a new empty migration file:
+Migrations are scripts that define transformations to your database schema over time. They allow you to:
+
+- **Track Schema Changes**: Keep a history of how your database schema evolves.
+- **Collaborate Effectively**: Ensure that all team members apply the same schema changes consistently.
+- **Deploy Safely**: Apply schema changes in a controlled manner, reducing the risk of errors.
+
+### Cambusa CLI Migration Commands
+
+Cambusa CLI offers a suite of commands to manage migrations efficiently. Below are the primary commands along with their usage and examples.
+
+1. Creating a Migration
+
+To create a new empty migration file where you can define your schema changes manually:
 
 ```bash
 bun run bin/cambusa.js migrations:create <MigrationName>
 ```
 
-This command will:
-- Generate a new TypeScript file in the `migrations` directory.
-- The file will be named with a timestamp and the name you provide.
-- It will contain empty `up` and `down` methods for you to fill in with your schema changes.
+**What It Does:**
 
-Example:
-```bash
-bun run bin/cambusa.js migrations:create AddUserTable
-```
+- **Generates a New Migration File**: Creates a new TypeScript file in the migrations directory, named with a timestamp and the provided migration name.
+- **Provides Skeleton Structure**: The file contains empty `up` and `down` methods where you can define the schema transformations.
 
-### Generating a Migration
+2. Generating a Migration
 
-To generate a migration based on the differences between your entity models and the current database schema:
+To automatically generate a migration based on the differences between your current entity models and the existing database schema:
 
 ```bash
 bun run bin/cambusa.js migrations:generate <MigrationName>
 ```
 
-This command will:
-- Compare your current entity models with the database schema.
-- If there are differences, it will generate a new migration file with the necessary changes.
-- If no changes are detected, it will inform you that no migration is needed.
+**What It Does:**
 
-Example:
-```bash
-bun run bin/cambusa.js migrations:generate UpdateUserSchema
-```
+- **Compares Models with Database**: Analyzes your entity models and identifies changes compared to the current database schema.
+- **Generates Migration Steps**: Automatically creates a migration file with the necessary SQL commands to apply the detected changes.
+- **Handles Both Up and Down Migrations**: Ensures that the migration can be both applied (`up`) and reverted (`down`).
 
-### Running Migrations
+**Notes:**
 
-To apply pending migrations to your database:
+- **Review Generated Migrations**: Always inspect the generated migration files to ensure they accurately reflect the intended changes.
+- **Manual Adjustments**: You can manually tweak the migration files if needed, especially for complex transformations.
+
+3. Running Migrations
+
+To apply all pending migrations to your database:
 
 ```bash
 bun run bin/cambusa.js migrations:run
 ```
 
-This command will:
-- Check for any pending migrations that haven't been applied to the database.
-- Run these migrations in order, updating your database schema.
-- Display a list of successfully applied migrations.
+**What It Does:**
 
-If there are no pending migrations, it will inform you that no migrations need to be run.
+- **Applies Pending Migrations**: Executes all migration files that haven't been applied yet, updating your database schema accordingly.
+- **Updates Migration History**: Keeps track of applied migrations to prevent reapplying them in the future.
 
-### Notes on Migration Commands
+**Notes:**
 
-- **Creating Migrations**: Use this when you want to manually write migration steps.
-- **Generating Migrations**: Use this when you've made changes to your entity models and want to automatically create a migration based on those changes.
-- **Running Migrations**: Always run this command after creating or generating new migrations to apply the changes to your database.
+- **Idempotent Operations**: Ensure that migrations are idempotent to prevent issues when running them multiple times.
+- **Order Matters**: Migrations are applied in the order they are created, typically based on their timestamps.
 
-### Best Practices
+### Database Synchronization (db:sync)
 
-1. Always review generated migrations before applying them to ensure they match your intended changes.
-2. Keep migrations small and focused on specific changes to make them easier to review and revert if necessary.
-3. Test migrations thoroughly in a development environment before applying them to production.
-4. Use descriptive names for your migrations to easily understand what each one does.
-5. Run the `migrations:run` command as part of your deployment process to ensure your database schema is always up to date.
+Database synchronization is a feature provided by TypeORM that allows automatic synchronization of your entity models with the database schema. While it can be convenient during development, it comes with significant caveats, especially concerning data integrity and control over schema changes.
+
+#### What is db:sync?
+- **Automatic Schema Updates**: db:sync automatically generates and applies schema changes to your database based on your entity models whenever your application starts.
+- **Development Convenience**: It reduces the need to manually manage migrations during the initial development phase.
+
+#### How Does db:sync Work in TypeORM?
+
+When `synchronize: true` is set in your TypeORM data source options, TypeORM performs the following actions on application startup:
+
+1. **Schema Comparison**: Compares the current entity models with the existing database schema.
+2. **Automatic Updates**: Applies necessary changes to align the database schema with the models. This includes creating tables, adding or removing columns, and altering column types.
+3. **No Migration History Tracking**: Unlike migrations, db:sync does not keep track of applied changes, making it unsuitable for production environments.
+
+**Notes:**
+
+- **Development Only**: It's strongly recommended to use db:sync only in development environments. Avoid using it in production to prevent unintended schema changes and potential data loss.
+- **Performance Considerations**: Automatic synchronization can impact application startup time, especially for large schemas.
+- **Limited Control**: db:sync does not provide granular control over schema changes, making it difficult to manage complex migrations.
