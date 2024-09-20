@@ -323,3 +323,60 @@ const comment = cambusa.models.Comment.create({
 
 await cambusa.models.Comment.save(comment);
 ```
+
+## Database Migrations
+
+Cambusa provides commands to manage database migrations, allowing you to version control your database schema changes.
+
+### Creating a Migration
+
+To create a new empty migration file:
+
+```bash
+bun run bin/cambusa.js migrations:create <MigrationName>
+```
+
+This command will:
+- Generate a new TypeScript file in the `migrations` directory.
+- The file will be named with a timestamp and the name you provide.
+- It will contain empty `up` and `down` methods for you to fill in with your schema changes.
+
+Example:
+```bash
+bun run bin/cambusa.js migrations:create AddUserTable
+```
+
+### Generating a Migration
+
+To generate a migration based on the differences between your entity models and the current database schema:
+
+```bash
+bun run bin/cambusa.js migrations:generate <MigrationName>
+```
+
+This command will:
+- Compare your current entity models with the database schema.
+- If there are differences, it will generate a new migration file with the necessary changes.
+- If no changes are detected, it will inform you that no migration is needed.
+
+Example:
+```bash
+bun run bin/cambusa.js migrations:generate UpdateUserSchema
+```
+
+### Notes on Migration Generation
+
+- If no changes are detected, you'll see a message indicating that no new migration was generated.
+- In this case, you might want to use the `migrations:create` command instead to create an empty migration file that you can manually edit.
+
+### Running Migrations
+
+To apply pending migrations to your database:
+
+```bash
+bun run bin/cambusa.js migrations:run
+```
+
+This command will:
+- Check for any pending migrations that haven't been applied to the database.
+- Run these migrations in order, updating your database schema.

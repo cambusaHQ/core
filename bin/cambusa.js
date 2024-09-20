@@ -269,6 +269,43 @@ program
   });
 
 program
+  .command('migrations:run')
+  .description('Run pending migrations')
+  .action(async () => {
+    try {
+      const cambusa = await importCambusa();
+      if (!cambusa || !cambusa.db) {
+        throw new Error(
+          'Failed to initialize Cambusa instance or database connection.'
+        );
+      }
+
+      const dataSource = cambusa.db;
+      if (!dataSource.isInitialized) {
+        await dataSource.initialize();
+      }
+
+      console.log('Running pending migrations...');
+      const migrations = await dataSource.runMigrations();
+
+      if (migrations.length === 0) {
+        console.log('No pending migrations to run.');
+      } else {
+        console.log(`Successfully ran ${migrations.length} migration(s):`);
+        migrations.forEach((migration) => {
+          console.log(`- ${migration.name}`);
+        });
+      }
+    } catch (error) {
+      console.error('Failed to run migrations:', error.message);
+    } finally {
+      if (cambusa && cambusa.db) {
+        await cambusa.db.destroy();
+      }
+    }
+  });
+
+program
   .command('migrations:create <name>')
   .description('Create a new empty migration')
   .action(async (name) => {
