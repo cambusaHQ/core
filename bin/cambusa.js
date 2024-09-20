@@ -3,6 +3,7 @@
 import fs from 'fs';
 import path from 'path';
 import { createRequire } from 'module';
+import readline from 'readline';
 import { program } from 'commander';
 
 const require = createRequire(import.meta.url);
@@ -144,6 +145,69 @@ program
       }
     } catch (error) {
       console.error('Failed to synchronize database schema:', error);
+    }
+  });
+
+program
+  .command("repl")
+  .description("Start an interactive REPL session with Cambusa loaded")
+  .action(async () => {
+    try {
+      const cambusa = await importCambusa();
+      if (cambusa) {
+        console.log("Starting Cambusa REPL session...");
+        console.log('Cambusa instance is available as "cambusa"');
+        console.log('Type "exit" to exit the session');
+
+        const customCommands = {
+          routes: () => {
+            const routes = cambusa.app.routes;
+            console.log("Registered routes:");
+            routes.forEach((route) => {
+              console.log(`${route.method} ${route.path}`);
+            });
+          },
+          models: () => {
+            const models = Object.keys(cambusa.models);
+            console.log("Available models:");
+            models.forEach((model) => console.log(`- ${model}`));
+          },
+          help: () => {
+            console.log("Available commands:");
+            console.log("  routes - List all registered routes");
+            console.log("  models - List all available models");
+            console.log("  help   - Show this help message");
+            console.log("  exit   - Exit the REPL session");
+          },
+        };
+
+        for await (const line of console) {
+          const input = line.trim();
+          if (input.toLowerCase() === "exit") {
+            console.log("Exiting Cambusa REPL session...");
+            break;
+          }
+          if (customCommands[input]) {
+            customCommands[input]();
+          } else {
+            try {
+              // Use Function constructor to create a function with 'cambusa' in its scope
+              const result = await new Function(
+                "cambusa",
+                `return (async () => { return ${input} })()`
+              ).call(null, cambusa);
+              console.log(result);
+            } catch (error) {
+              console.error("Error:", error.message);
+            }
+          }
+          console.log("\ncambusa> "); // Print the prompt for the next input
+        }
+      } else {
+        console.error("Failed to initialize Cambusa instance.");
+      }
+    } catch (error) {
+      console.error("Failed to start Cambusa REPL session:", error);
     }
   });
 
