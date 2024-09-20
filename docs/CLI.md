@@ -10,7 +10,9 @@ The Cambusa CLI is included with your Cambusa project. No additional installatio
 
 To use the Cambusa CLI, run the following command from your project root:
 
-`bun run bin/cambusa.js [command] [options]`
+```bash
+bun run bin/cambusa.js [command] [options]
+```
 
 ### Global Options
 
@@ -81,3 +83,90 @@ Once in the session, you can interact with the Cambusa instance directly. The Ca
 This REPL-like session supports both synchronous and asynchronous operations. You can use `await` directly in your commands for asynchronous operations.
 
 Please note that while this environment provides a powerful way to interact with your Cambusa application, it should be used cautiously, especially when performing operations that could modify your application state.
+
+##  Run Custom Scripts
+
+Run custom scripts located within the `./scripts` directory or its subdirectories.
+
+The run command allows you to execute scripts that perform various tasks, such as data migrations, report generation, or utility operations. Scripts can be organized into subdirectories for better management.
+
+### Syntax:
+
+```bash
+bun run bin/cambusa.js run <scriptPath> [args...]
+```
+
+- `<scriptPath>`: The path to the script relative to the `./scripts` directory. Use forward slashes (`/`) to denote subdirectories.
+- `[args...]`: Optional arguments to pass to the script.
+
+### Example: running a script in a subdirectory
+
+Suppose you have a script `migrateUsers.js` inside the `./scripts/migrations` directory.
+
+**Example code**:
+
+```js
+/**
+ * Migration Script to Migrate Users
+ * @param {Object} cambusa - The Cambusa instance
+ * @param {Array} args - Additional arguments passed from the CLI
+ */
+export default async function (cambusa, args) {
+  try {
+    const batchSize = args.includes('--batchSize') ? args[args.indexOf('--batchSize') + 1] : 100;
+    const dryRun = args.includes('--dryRun') ? args[args.indexOf('--dryRun') + 1] === 'true' : false;
+
+    console.log('Starting User Migration...');
+    console.log(`Batch Size: ${batchSize}`);
+    console.log(`Dry Run: ${dryRun}`);
+
+    // Fetch users
+    const users = await cambusa.models.User.findAll();
+    console.log(`Found ${users.length} users.`);
+
+    if (dryRun) {
+      console.log('Dry run enabled. No changes will be made.');
+      // Implement dry run logic here
+    } else {
+      // Implement migration logic here
+      for (let i = 0; i < users.length; i += parseInt(batchSize)) {
+        const batch = users.slice(i, i + parseInt(batchSize));
+        // Process each batch
+        // Example: Update user records
+        for (const user of batch) {
+          user.isMigrated = true;
+          await user.save();
+        }
+        console.log(`Migrated batch ${i / batchSize + 1}`);
+      }
+      console.log('User Migration completed successfully.');
+    }
+
+    console.log('Script executed successfully.');
+  } catch (error) {
+    console.error('Error executing migrateUsers script:', error);
+    process.exit(1);
+  }
+}
+```
+
+**Command:**
+
+```bash
+bun run bin/cambusa.js run migrations/migrateUsers
+```
+
+### List All Available Scripts
+
+List all scripts available within the `./scripts` directory and its subdirectories.
+
+**Command:**
+
+```bash
+bun run bin/cambusa.js scripts:list
+```
+
+### Notes
+
+- **Script Structure**: Each script should export a default asynchronous function that accepts the Cambusa instance and an array of arguments.
+- **Argument Parsing**: For more sophisticated argument parsing within scripts, consider using libraries like `minimist` or `yargs`.

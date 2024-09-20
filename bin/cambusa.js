@@ -3,6 +3,8 @@
 import fs from 'fs';
 import path from 'path';
 import { createRequire } from 'module';
+import readline from 'readline';
+
 import { program } from 'commander';
 
 const require = createRequire(import.meta.url);
@@ -23,6 +25,28 @@ async function importCambusa() {
   return cambusa.default;
 }
 
+/**
+ * Recursively retrieves all .js script paths within a directory.
+ * @param {string} dir - The directory to search.
+ * @param {string} baseDir - The base directory for relative paths.
+ * @returns {string[]} - An array of script paths relative to baseDir.
+ */
+function getAllScripts(dir, baseDir) {
+  let scripts = [];
+  const files = fs.readdirSync(dir, { withFileTypes: true });
+
+  for (const file of files) {
+    const fullPath = path.join(dir, file.name);
+    if (file.isDirectory()) {
+      scripts = scripts.concat(getAllScripts(fullPath, baseDir));
+    } else if (file.isFile() && file.name.endsWith('.js')) {
+      scripts.push(path.relative(baseDir, fullPath).replace(/\.js$/, ''));
+    }
+  }
+
+  return scripts;
+}
+
 program
   .command('models:generate <name>')
   .description('Generate a new model')
@@ -36,7 +60,7 @@ export default {
     // Define your relations here
   },
 };
-`;
+    `;
     const fileName = `${name}.js`;
     const filePath = path.join(process.cwd(), 'api', 'models', fileName);
 
@@ -49,10 +73,20 @@ program
   .description('List all models')
   .action(() => {
     const modelsDir = path.join(process.cwd(), 'api', 'models');
+    if (!fs.existsSync(modelsDir)) {
+      console.error('Models directory does not exist.');
+      process.exit(1);
+    }
+
     const models = fs
       .readdirSync(modelsDir)
       .filter((file) => file.endsWith('.js'))
       .map((file) => path.basename(file, '.js'));
+
+    if (models.length === 0) {
+      console.log('No models found.');
+      return;
+    }
 
     console.log('Available models:');
     models.forEach((model) => console.log(`- ${model}`));
@@ -120,7 +154,7 @@ export default {
     // Delete a specific resource
   }
 };
-`;
+    `;
     const fileName = `${name}.js`;
     const filePath = path.join(process.cwd(), 'api', 'controllers', fileName);
 
@@ -180,11 +214,20 @@ program
           },
         };
 
-        for await (const line of console) {
+        const rl = readline.createInterface({
+          input: process.stdin,
+          output: process.stdout,
+          prompt: 'cambusa> ',
+        });
+
+        rl.prompt();
+
+        rl.on('line', async (line) => {
           const input = line.trim();
           if (input.toLowerCase() === 'exit') {
             console.log('Exiting Cambusa REPL session...');
-            break;
+            rl.close();
+            return;
           }
           if (customCommands[input]) {
             customCommands[input]();
@@ -200,13 +243,87 @@ program
               console.error('Error:', error.message);
             }
           }
-          console.log('\ncambusa> '); // Print the prompt for the next input
-        }
+          rl.prompt();
+        }).on('close', () => {
+          process.exit(0);
+        });
       } else {
         console.error('Failed to initialize Cambusa instance.');
       }
     } catch (error) {
       console.error('Failed to start Cambusa REPL session:', error);
+    }
+  });
+
+program
+  .command('run <scriptPath> [args...]')
+  .description(
+    'Run a script from the ./scripts directory or its subdirectories with optional arguments'
+  )
+  .action(async (scriptPath, args) => {
+    try {
+      const cambusa = await importCambusa();
+
+      const scriptsDir = path.resolve(process.cwd(), 'scripts');
+      const fullScriptPath = path.resolve(scriptsDir, `${scriptPath}.js`);
+
+      // Ensure the script is within the scripts directory
+      if (!fullScriptPath.startsWith(scriptsDir)) {
+        console.error(
+          'Invalid script path. Scripts must be within the ./scripts directory.'
+        );
+        process.exit(1);
+      }
+
+      if (!fs.existsSync(fullScriptPath)) {
+        console.error(`Script '${scriptPath}' not found in scripts directory.`);
+        process.exit(1);
+      }
+
+      const scriptModule = await import(fullScriptPath);
+
+      if (typeof scriptModule.default !== 'function') {
+        console.error(
+          `Script '${scriptPath}' does not export a default function.`
+        );
+        process.exit(1);
+      }
+
+      // Execute the script, passing the cambusa instance and additional arguments
+      await scriptModule.default(cambusa, args);
+
+      console.log(`Script '${scriptPath}' executed successfully.`);
+    } catch (error) {
+      console.error(`Failed to run script '${scriptPath}':`, error);
+      process.exit(1);
+    }
+  });
+
+program
+  .command('scripts:list')
+  .description(
+    'List all available scripts in the ./scripts directory and its subdirectories'
+  )
+  .action(() => {
+    try {
+      const scriptsDir = path.resolve(process.cwd(), 'scripts');
+      if (!fs.existsSync(scriptsDir)) {
+        console.error('Scripts directory does not exist.');
+        process.exit(1);
+      }
+
+      const scripts = getAllScripts(scriptsDir, scriptsDir);
+
+      if (scripts.length === 0) {
+        console.log('No scripts found in the scripts directory.');
+        return;
+      }
+
+      console.log('Available Scripts:');
+      scripts.forEach((script) => console.log(`- ${script}`));
+    } catch (error) {
+      console.error('Failed to list scripts:', error);
+      process.exit(1);
     }
   });
 
