@@ -10,12 +10,6 @@ export default {
     price: {
       type: 'decimal',
     },
-    createdAt: {
-      type: 'date',
-    },
-    updatedAt: {
-      type: 'date',
-    },
   },
   relations: {
     categories: {

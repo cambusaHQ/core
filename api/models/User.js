@@ -20,12 +20,6 @@ export default {
       type: 'boolean',
       default: true,
     },
-    createdAt: {
-      type: 'date',
-    },
-    updatedAt: {
-      type: 'date',
-    },
   },
   relations: {
     orders: {
