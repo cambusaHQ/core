@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "baseUrl": "./",         // Set the base URL for the project
+    "baseUrl": "./", // Set the base URL for the project
     "paths": {
       "@/*": ["./*"],
       "@bin/*": ["bin/*"],

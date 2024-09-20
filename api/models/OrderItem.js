@@ -6,7 +6,7 @@ export default {
     price: {
       type: 'decimal',
       precision: 10,
-      scale: 2
+      scale: 2,
     },
   },
   relations: {

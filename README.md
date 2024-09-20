@@ -74,7 +74,6 @@ Cambusa automagically supports **envirnoment variables** and **command line argu
 
 [🔗 Config documentation](./docs/CONFIG.md)
 
-
 ## The `cambusa` Global Object
 
 The `cambusa` global object is a central part of the Cambusa framework, providing access to various components and utilities throughout your application.
@@ -108,7 +107,6 @@ const formattedDate = cambusa.helpers.formatDate(new Date());
 ```
 
 The `cambusa` object is automatically available in your controllers, models, and other parts of your application, allowing easy access to core functionalities without the need for manual imports.
-
 
 ## Creating Routes and Controllers
 
@@ -207,7 +205,7 @@ You can easily customize or disable specific routes for each model by defining t
 export const Product = {
   routes: {
     disabled: ['delete', 'update'], // Disable DELETE and UPDATE routes
-    basePath: 'products',  // Custom base path for this model
+    basePath: 'products', // Custom base path for this model
   },
   columns: {
     name: { type: 'varchar' },
@@ -287,6 +285,7 @@ GET /users?populate=orders,profile
 This will return users along with their related orders and profile information.
 
 ## Middleware System
+
 Cambusa uses a flexible middleware system that allows you to easily add functionality to your application's request/response cycle.
 
 ### Configuring Middlewares
@@ -311,10 +310,9 @@ To create a custom middleware, add a new file in the api/middlewares/ directory.
 import { Elysia } from 'elysia';
 import { cors } from '@elysiajs/cors';
 
-const plugin =  new Elysia({
-    name: 'cors',
-  })
-  .use(cors(cambusa.config.security.cors));
+const plugin = new Elysia({
+  name: 'cors',
+}).use(cors(cambusa.config.security.cors));
 
 export default plugin;
 ```
@@ -369,8 +367,8 @@ The log level can be configured in the `logger` section of your configuration fi
 // config/logger.js
 export default {
   logger: {
-    level: 'info',  // Default log level
-    logRequests: true,  // Log requests by default
+    level: 'info', // Default log level
+    logRequests: true, // Log requests by default
   },
 };
 ```
@@ -419,4 +417,5 @@ Contributions are welcome! Feel free to open issues or submit pull requests to h
 MIT License
 
 ## Author
+
 [Enrico Deleo](https://enricodeleo.com/)

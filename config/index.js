@@ -82,7 +82,11 @@ function setConfigValue(obj, key, value) {
     const k = keys[i];
 
     // Ensure current[k] is an object
-    if (!current[k] || typeof current[k] !== 'object' || Array.isArray(current[k])) {
+    if (
+      !current[k] ||
+      typeof current[k] !== 'object' ||
+      Array.isArray(current[k])
+    ) {
       current[k] = {};
     }
 

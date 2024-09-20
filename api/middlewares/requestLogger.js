@@ -1,9 +1,9 @@
 // Conditionally apply request logging middleware based on configuration
 import { Elysia } from 'elysia';
 
-const plugin =  new Elysia({
-    name: 'requestLogger',
-  })
+const plugin = new Elysia({
+  name: 'requestLogger',
+});
 
 if (cambusa.config.logger?.logRequests) {
   plugin.onRequest(({ request, path }) => {

@@ -1,7 +1,3 @@
 export default {
-  middlewares: [
-    'cors',
-    'requestLogger',
-    'swagger',
-  ],
-}
+  middlewares: ['cors', 'requestLogger', 'swagger'],
+};

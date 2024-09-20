@@ -67,7 +67,10 @@ async function updateEntity(endpoint, id, data) {
       result = await response.json();
     } catch (jsonError) {
       const text = await response.text();
-      console.error(`Error parsing JSON response from ${endpoint} ${id}:`, text);
+      console.error(
+        `Error parsing JSON response from ${endpoint} ${id}:`,
+        text
+      );
       return false;
     }
 
@@ -123,9 +126,13 @@ async function createCategories(count = 5) {
 async function createProducts(count = 20, categories = []) {
   const products = [];
   for (let i = 0; i < count; i++) {
-    const selectedCategories = faker.helpers.arrayElements(categories, faker.number.int({ min: 1, max: 3 }));
+    const selectedCategories = faker.helpers.arrayElements(
+      categories,
+      faker.number.int({ min: 1, max: 3 })
+    );
     const productData = {
-      name: faker.commerce.productName() + ' ' + faker.string.uuid().slice(0, 5), // Ensure uniqueness
+      name:
+        faker.commerce.productName() + ' ' + faker.string.uuid().slice(0, 5), // Ensure uniqueness
       description: faker.lorem.paragraph(),
       price: parseFloat(faker.commerce.price()),
       createdAt: faker.date.past().toISOString(),
@@ -145,7 +152,12 @@ async function createOrders(count = 15, users = []) {
     const user = faker.helpers.arrayElement(users);
     const orderNumber = `ORD-${faker.string.uuid().slice(0, 8).toUpperCase()}`;
     const orderDate = faker.date.past().toISOString();
-    const status = faker.helpers.arrayElement(['pending', 'shipped', 'delivered', 'cancelled']);
+    const status = faker.helpers.arrayElement([
+      'pending',
+      'shipped',
+      'delivered',
+      'cancelled',
+    ]);
     const metadata = JSON.stringify({
       notes: faker.lorem.sentence(),
     }); // Stringify metadata to prevent "[object Object]"
@@ -179,7 +191,7 @@ async function createOrderItems(orders = [], products = []) {
       const orderItemData = {
         quantity,
         price,
-        orderId: order.id,     // Assuming the API accepts orderId for relations
+        orderId: order.id, // Assuming the API accepts orderId for relations
         productId: product.id, // Assuming the API accepts productId for relations
       };
 
@@ -187,7 +199,9 @@ async function createOrderItems(orders = [], products = []) {
     }
 
     // Update the order with the totalAmount
-    const updateSuccess = await updateEntity('orders', order.id, { totalAmount });
+    const updateSuccess = await updateEntity('orders', order.id, {
+      totalAmount,
+    });
     if (!updateSuccess) {
       console.error(`Failed to update totalAmount for Order ID: ${order.id}`);
     }

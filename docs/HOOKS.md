@@ -13,70 +13,87 @@ The hook system in **Cambusa** provides a way to execute custom code at specific
 Here is a list of all possible hooks in Cambusa, along with descriptions of when they are executed:
 
 1. **`beforeInitialization`**
+
    - **When executed**: Before the application starts the initialization process.
    - **Purpose**: Perform actions or set up configurations before any initialization occurs.
 
 2. **`afterHooksLoaded`**
+
    - **When executed**: Immediately after all hooks from the `api/hooks` directory have been loaded.
    - **Purpose**: Perform actions after all other hooks have been registered.
 
 3. **`beforeMiddlewaresLoaded`**
+
    - **When executed**: Before the application loads middlewares.
    - **Purpose**: Modify middleware configurations or register additional middlewares before the main ones are loaded.
 
 4. **`afterMiddlewaresLoaded`**
+
    - **When executed**: After all middlewares have been loaded.
    - **Purpose**: Perform actions or register additional middlewares after the main ones are in place.
 
 5. **`beforeRoutesLoaded`**
+
    - **When executed**: Before the application loads routes.
    - **Purpose**: Modify route configurations or register additional routes before the main ones are loaded.
 
 6. **`afterRoutesLoaded`**
+
    - **When executed**: After all routes have been loaded.
    - **Purpose**: Perform actions or register additional routes after the main ones are in place.
 
 7. **`beforeHelpersLoaded`**
+
    - **When executed**: Before the application loads helpers.
    - **Purpose**: Modify helper configurations or register additional helpers before the main ones are loaded.
 
 8. **`afterHelpersLoaded`**
+
    - **When executed**: After all helpers have been loaded.
    - **Purpose**: Perform actions or register additional helpers after the main ones are in place.
 
 9. **`beforeDatabaseInitialized`**
+
    - **When executed**: Before the database initialization process starts.
    - **Purpose**: Modify database configurations or perform actions before the database connection is established.
 
 10. **`afterDatabaseInitialized`**
+
     - **When executed**: After the database has been initialized.
     - **Purpose**: Perform actions that depend on the database being ready, such as seeding data or logging.
 
 11. **`onInitialized`**
+
     - **When executed**: After the entire initialization process is complete.
     - **Purpose**: Perform actions once the application is fully initialized but before the server starts.
 
 12. **`beforeServerStart`**
+
     - **When executed**: Just before the server starts listening for requests.
     - **Purpose**: Perform last-minute configurations or checks before the server is live.
 
 13. **`onServerStarted`**
+
     - **When executed**: After the server has started and is listening for requests.
     - **Purpose**: Perform actions like logging, notifying services, or starting scheduled tasks.
 
 14. **`onRequest`**
+
     - **When executed**: At the beginning of each incoming request.
     - **Purpose**: Perform actions like authentication, logging, or modifying the request.
 
 15. **`onResponse`**
+
     - **When executed**: After a response is sent to the client.
     - **Purpose**: Perform actions like logging or cleanup tasks.
 
 16. **`onError`**
+
     - **When executed**: Whenever an error occurs in the application.
     - **Purpose**: Handle errors, log them, or modify error responses.
 
 17. **`beforeShutdown`**
+
     - **When executed**: Before the application starts the shutdown process.
     - **Purpose**: Perform cleanup tasks, such as closing connections or saving state.
 

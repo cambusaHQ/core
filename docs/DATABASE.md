@@ -32,8 +32,8 @@ Example with PostgreSQL:
 ```js
 export default {
   database: {
-    type: 'postgres',  // Example: Switch to PostgreSQL
-    url: 'postgresql://username:password@localhost:5432/mydb',  // Database connection URL
+    type: 'postgres', // Example: Switch to PostgreSQL
+    url: 'postgresql://username:password@localhost:5432/mydb', // Database connection URL
   },
 };
 ```
@@ -43,6 +43,7 @@ The configuration should follow the TypeORM's [Data Source Options](https://orkh
 ## Models
 
 ### Loading Models
+
 Models are automatically loaded from the `api/models/` directory. Each model is defined by exporting a default object that specifies the model's schema using TypeORM's EntitySchema format.
 
 ### Model Definition and Types
@@ -108,7 +109,7 @@ export default {
     },
     ownerId: {
       type: 'ref',
-      nativeType: 'bigint',  // Optional: specify native type for the foreign key
+      nativeType: 'bigint', // Optional: specify native type for the foreign key
     },
   },
 };
@@ -134,7 +135,7 @@ export default {
   relations: {
     user: {
       type: 'many-to-one',
-      target: 'User',  // References the User model
+      target: 'User', // References the User model
       joinColumn: { name: 'userId' },
       onDelete: 'SET NULL',
     },
@@ -155,7 +156,7 @@ export default {
   relations: {
     parent: {
       type: 'many-to-one',
-      target: 'Category',  // Self-referential relation
+      target: 'Category', // Self-referential relation
       joinColumn: { name: 'parentId' },
       onDelete: 'SET NULL',
     },
@@ -192,10 +193,10 @@ export default {
   relations: {
     author: {
       type: 'many-to-one',
-      target: 'User',       // The target entity is the User model
+      target: 'User', // The target entity is the User model
       inverseSide: 'posts', // Reference to the 'posts' property in the User model
-      joinColumn: { name: 'userId' },  // The foreign key column in the Post table
-      onDelete: 'CASCADE',  // If a user is deleted, the posts are also deleted
+      joinColumn: { name: 'userId' }, // The foreign key column in the Post table
+      onDelete: 'CASCADE', // If a user is deleted, the posts are also deleted
     },
   },
 };
@@ -231,8 +232,8 @@ export default {
 ```js
 export default {
   primaryKey: false, // Disable automatic primary key
-  createdAt: false,  // Disable automatic createdAt column
-  updatedAt: false,  // Disable automatic updatedAt column
+  createdAt: false, // Disable automatic createdAt column
+  updatedAt: false, // Disable automatic updatedAt column
   columns: {
     // columns definition
   },

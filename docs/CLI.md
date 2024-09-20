@@ -3,6 +3,7 @@
 Cambusa CLI is a command-line interface for the Cambusa Framework, designed to streamline development tasks and manage your Cambusa application.
 
 ## Installation
+
 The Cambusa CLI is included with your Cambusa project. No additional installation is required.
 
 ## Usage
@@ -49,21 +50,25 @@ Once in the session, you can interact with the Cambusa instance directly. The Ca
 ### Examples
 
 1. View the current configuration:
+
    ```
    cambusa> cambusa.config
    ```
 
 2. Use the logger:
+
    ```
    cambusa> cambusa.log.debug('test message')
    ```
 
 3. Fetch a user from the database (assuming you have a User model):
+
    ```
    cambusa> await cambusa.models.User.findOne({ where: { id: 1 } })
    ```
 
 4. List all routes:
+
    ```
    cambusa> routes
    ```
