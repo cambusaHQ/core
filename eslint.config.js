@@ -9,6 +9,7 @@ export default [
       globals: {
         ...globals.node, // Existing global browser variables
         cambusa: 'readonly', // Define cambusa as a readonly global variable
+        Bun: 'readonly', // Define cambusa as a readonly global variable
       },
       ecmaVersion: 2022, // Enable ES6/ES7+ syntax
       sourceType: 'module', // Use ES modules (import/export)

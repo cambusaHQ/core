@@ -1,11 +1,12 @@
 #!/usr/bin/env bun
 
 import fs from 'fs';
+import { unlinkSync } from 'node:fs';
 import path from 'path';
 import { createRequire } from 'module';
 import readline from 'readline';
-
 import { program } from 'commander';
+import { $ } from 'bun';
 
 const require = createRequire(import.meta.url);
 const { version } = require('../package.json');
@@ -178,6 +179,126 @@ program
       }
     } catch (error) {
       console.error('Failed to synchronize database schema:', error);
+    }
+  });
+
+program
+  .command('migrations:generate <name>')
+  .description('Generate a new migration based on entity changes')
+  .action(async (name) => {
+    try {
+      const cambusa = await importCambusa();
+      if (!cambusa || !cambusa.db) {
+        throw new Error(
+          'Failed to initialize Cambusa instance or database connection.'
+        );
+      }
+
+      const dataSource = cambusa.db;
+      if (!dataSource.isInitialized) {
+        await dataSource.initialize();
+      }
+
+      const migrationName = `${Date.now()}-${name}`;
+      const migrationPath = path.join(process.cwd(), 'migrations');
+
+      // Ensure the migrations directory exists
+      await $`mkdir -p ${migrationPath}`;
+
+      const tempConfigPath = path.join(
+        process.cwd(),
+        'temp-typeorm-config.cjs'
+      );
+      const configContent = `
+      const { DataSource } = require("typeorm");
+      module.exports = new DataSource(${JSON.stringify(
+        dataSource.options,
+        (key, value) => {
+          if (key === 'entities') {
+            return value; // This will keep the entities as a JavaScript array
+          }
+          return value;
+        },
+        2
+      )
+        .replace('"entities": [', '"entities": [\n')
+        .replace(/\\"/g, '"')});`;
+
+      await Bun.write(tempConfigPath, configContent);
+
+      try {
+        // Run TypeORM CLI command to generate migration
+        const fullMigrationPath = path.join(migrationPath, migrationName);
+        const result =
+          await $`bunx typeorm migration:generate -d ${tempConfigPath} ${fullMigrationPath}`;
+
+        if (
+          result.stdout.includes('No changes in database schema were found')
+        ) {
+          console.log(
+            'No changes in database schema were detected. No new migration was generated.'
+          );
+          console.log(
+            "If you want to create an empty migration, use the 'migrations:create' command instead."
+          );
+        } else {
+          console.log('Migration generation output:', result.stdout.toString());
+          console.log(`Migration ${migrationName} has been generated.`);
+        }
+      } catch (error) {
+        if (
+          error.stderr &&
+          error.stderr.includes('No changes in database schema were found')
+        ) {
+          console.log(
+            'No changes in database schema were detected. No new migration was generated.'
+          );
+          console.log(
+            "If you want to create an empty migration, use the 'migrations:create' command instead."
+          );
+        } else {
+          throw error;
+        }
+      } finally {
+        // Remove the temporary config file
+        unlinkSync(tempConfigPath);
+      }
+    } catch (error) {
+      console.error('Failed to generate migration:', error.message);
+    }
+  });
+
+program
+  .command('migrations:create <name>')
+  .description('Create a new empty migration')
+  .action(async (name) => {
+    try {
+      const cambusa = await importCambusa();
+      if (!cambusa || !cambusa.db) {
+        throw new Error(
+          'Failed to initialize Cambusa instance or database connection.'
+        );
+      }
+
+      const dataSource = cambusa.db;
+      if (!dataSource.isInitialized) {
+        await dataSource.initialize();
+      }
+
+      const migrationName = `${Date.now()}-${name}`;
+      const migrationPath = path.join(process.cwd(), 'migrations');
+
+      // Ensure the migrations directory exists
+      await $`mkdir -p ${migrationPath}`;
+
+      const fullMigrationPath = path.join(migrationPath, migrationName);
+      const result =
+        await $`bunx typeorm migration:create ${fullMigrationPath}`;
+
+      console.log('Migration creation output:', result.stdout.toString());
+      console.log(`Empty migration ${migrationName} has been created.`);
+    } catch (error) {
+      console.error('Failed to create migration:', error.message);
     }
   });
 
