@@ -404,6 +404,21 @@ Cambusa's hook system provides a powerful and flexible way to extend and customi
 
 [🔗 Hooks documentation](./docs/HOOKS.md)
 
+## CLI
+
+Cambusa provides a powerful [CLI tool](./docs/CLI.md) to streamline development tasks and manage your application efficiently. The CLI supports a variety of commands, including generating models and controllers, synchronizing the database, running custom scripts, and more.
+
+### Key Features
+
+- **Model and Controller Generation:** Quickly scaffold new models and controllers with predefined templates.
+- **Database Synchronization:** Easily synchronize your database schema based on your models.
+- **Script Execution:** Run custom scripts organized within subdirectories to perform tasks like migrations, data processing, and more.
+- **Interactive REPL Session:** Start an interactive session to interact directly with your Cambusa application.
+
+For detailed instructions on all available commands, usage examples, and advanced features, please refer to the
+
+[🔗 CLI documentation](./docs/CLI.md)
+
 ## Philosophy
 
 **Cambusa** is born out of a deep appreciation for Sails.js and its developer-friendly conventions. The goal is to replicate that enjoyable development experience using modern JavaScript features and harnessing the performance benefits of Bun. By adopting a modest and essentialist approach—just like a ship's cambusa—we focus on providing only what's necessary to build robust applications without unnecessary complexity.
