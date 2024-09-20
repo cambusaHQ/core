@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.4.1](https://github.com/enricodeleo/cambusa/compare/0.4.0...0.4.1) (2024-09-20)
+
+
+### Features
+
+* add REPL command to Cambusa CLI for interactive sessions ([f67754b](https://github.com/enricodeleo/cambusa/commit/f67754b9d3de3d6ec671d4b099222862459fd828))
+* add script execution and listing capabilities to CLI ([a29d99b](https://github.com/enricodeleo/cambusa/commit/a29d99ba2b090fed2efe15f430fc787c170d182c))
+
+
+### Code Refactoring
+
+* code style ([faf6f19](https://github.com/enricodeleo/cambusa/commit/faf6f19899dc6fac6dcc65d3343507d7bf98632e))
+* code style ([64bbb96](https://github.com/enricodeleo/cambusa/commit/64bbb962f1828adfc5964dda95eb212d1c6e1796))
+
 ## [0.4.0](https://github.com/enricodeleo/cambusa/compare/0.3.0...0.4.0) (2024-09-20)
 
 ### Features
