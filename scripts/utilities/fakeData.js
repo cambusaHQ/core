@@ -97,7 +97,9 @@ export default async function (cambusa, args) {
     }
 
     for (const model of cambusa.schemas) {
-      cambusa.log.debug(`Generating ${count} records for model: ${model.name}...`);
+      cambusa.log.debug(
+        `Generating ${count} records for model: ${model.name}...`
+      );
       const fakeData = generateFakeData(model, count);
       const cleanData = fakeData.map((data) => {
         delete data.createdAt;
