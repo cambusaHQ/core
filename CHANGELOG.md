@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.5.2](https://github.com/enricodeleo/cambusa/compare/0.5.1...0.5.2) (2024-09-20)
+
+
+### Features
+
+* **User model:** add email and age field validations using elysia ([e5b579f](https://github.com/enricodeleo/cambusa/commit/e5b579f43fb109022f7307c2e0635b2170bfb365))
+
+
+### Documentation
+
+* custom validations ([223337e](https://github.com/enricodeleo/cambusa/commit/223337efef4b7cd9680bb4b9e48162f6de3f211d))
+* migrations and db:sync docs ([fb4136f](https://github.com/enricodeleo/cambusa/commit/fb4136f31549b72ffd3b1b38cf14d54248102a2d))
+
 ## [0.5.1](https://github.com/enricodeleo/cambusa/compare/0.5.0...0.5.1) (2024-09-20)
 
 
