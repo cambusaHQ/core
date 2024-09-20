@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.5.1](https://github.com/enricodeleo/cambusa/compare/0.5.0...0.5.1) (2024-09-20)
+
+
+### Features
+
+* **cambusa.js, datastore.js:** refactor loadSchemas to async and improve error handling ([dd40b82](https://github.com/enricodeleo/cambusa/commit/dd40b823038ed875fb811231ba9da9895cb5f7d2))
+
+
+### Documentation
+
+* **DATABASE.md:** streamline migration documentation, removing outdated section and adding best practices and detailed notes on migration commands ([c579b5a](https://github.com/enricodeleo/cambusa/commit/c579b5a5e5a25b38ee7c28706b447444e27ad458))
+
 ## [0.5.0](https://github.com/enricodeleo/cambusa/compare/0.4.1...0.5.0) (2024-09-20)
 
 
