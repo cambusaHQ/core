@@ -1,5 +1,35 @@
 # Changelog
 
+## [0.5.0](https://github.com/enricodeleo/cambusa/compare/0.4.1...0.5.0) (2024-09-20)
+
+
+### Features
+
+* add migration generation and creation commands to CLI ([1925401](https://github.com/enricodeleo/cambusa/commit/1925401fb4abd2ac5fe7e7e846e41e632694a423))
+* **cambusa.js:** add migrations:run command to execute pending database migrations ([898d926](https://github.com/enricodeleo/cambusa/commit/898d9266207bbe09707b7cdd883920acf4f05113))
+* **datastore:** add transformer support for column type conversions ([d620d99](https://github.com/enricodeleo/cambusa/commit/d620d99a3caa13754409307a70fe1217272bf108))
+
+
+### Bug Fixes
+
+* handle validation for relations when populated vs when they're not ([d241acf](https://github.com/enricodeleo/cambusa/commit/d241acf4c7d4e669c2fc278b2843a2f23ed7197b))
+
+
+### Documentation
+
+* update readme ([f5b8c26](https://github.com/enricodeleo/cambusa/commit/f5b8c26c43a542584462d46c5894da5c436152f4))
+
+
+### Code Refactoring
+
+* **models:** remove createdAt and updatedAt fields from Product and User models to rely on database defaults ([2cdd419](https://github.com/enricodeleo/cambusa/commit/2cdd41916ec056012de65e7d2e7bf13517e051e6))
+* renaming fake data generator ([539b774](https://github.com/enricodeleo/cambusa/commit/539b7745daeab6354c36038aebdebf1325f4ef65))
+
+
+### Chores
+
+* remove populateData.js script and refactor Cambusa library for improved schema handling and database initialization ([386b225](https://github.com/enricodeleo/cambusa/commit/386b22596c82d680214a62d4477026931dacf545))
+
 ## [0.4.1](https://github.com/enricodeleo/cambusa/compare/0.4.0...0.4.1) (2024-09-20)
 
 
