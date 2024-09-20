@@ -137,30 +137,59 @@ program
   .command('controllers:generate <name>')
   .description('Generate a new controller')
   .action((name) => {
-    const controllerTemplate = `
-export default {
-  index: async (ctx) => {
-    // List all resources
-  },
-  show: async (ctx) => {
-    // Show a specific resource
-  },
-  create: async (ctx) => {
-    // Create a new resource
-  },
-  update: async (ctx) => {
-    // Update a specific resource
-  },
-  delete: async (ctx) => {
-    // Delete a specific resource
-  }
-};
-    `;
-    const fileName = `${name}.js`;
-    const filePath = path.join(process.cwd(), 'api', 'controllers', fileName);
+    try {
+      // Define the base directory for controllers
+      const baseDir = path.join(process.cwd(), 'api', 'controllers');
 
-    fs.writeFileSync(filePath, controllerTemplate.trim());
-    console.log(`Controller ${name} created at ${filePath}`);
+      // Normalize the name to use forward slashes and remove leading/trailing slashes
+      const normalizedName = name.replace(/\\/g, '/').replace(/^\/|\/$/g, '');
+
+      // Determine if the user provided the .js extension
+      const hasJsExtension = normalizedName.endsWith('.js');
+
+      // Remove the .js extension if present to prevent double extensions
+      const nameWithoutExt = hasJsExtension
+        ? normalizedName.slice(0, -3)
+        : normalizedName;
+
+      // Construct the full file path
+      const filePath = path.join(baseDir, `${nameWithoutExt}.js`);
+
+      // Extract the directory path (excluding the file name)
+      const dirPath = path.dirname(filePath);
+
+      // Create the directory structure recursively if it doesn't exist
+      fs.mkdirSync(dirPath, { recursive: true });
+
+      // Define the controller template
+      const controllerTemplate = `
+      export default async function (req, res) {
+        try {
+          // TODO: Implement your controller logic here
+        } catch (error) {
+          console.error('Controller Error:', error);
+          res.status(500).send('Internal Server Error');
+        }
+      };
+      `.trimStart();
+
+      // Check if the file already exists to prevent overwriting
+      if (fs.existsSync(filePath)) {
+        console.error(`Error: Controller '${filePath}' already exists.`);
+        process.exit(1);
+      }
+
+      // Write the controller file
+      fs.writeFileSync(filePath, controllerTemplate, { encoding: 'utf8' });
+
+      console.log(`✅ Controller created at ${filePath}`);
+    } catch (error) {
+      console.error(
+        '❌ An error occurred while generating the controller:',
+        error.message
+      );
+      process.exit(1);
+    }
   });
 
 program
