@@ -1,5 +1,25 @@
 # Changelog
 
+## [0.6.0](https://github.com/enricodeleo/cambusa/compare/0.5.2...0.6.0) (2024-09-21)
+
+
+### Features
+
+* add WebSocket support for real-time communication ([33f513c](https://github.com/enricodeleo/cambusa/commit/33f513cad5ba3c8185e8e752a274ca2dd1df80c3))
+* **cambusa.js:** enhance controller generation with directory support, error handling, and template update ([8e5bfb3](https://github.com/enricodeleo/cambusa/commit/8e5bfb32caedb5fccdd5d7405e4e14ceaa69e67c))
+
+
+### Documentation
+
+* better commenting ([7e90e93](https://github.com/enricodeleo/cambusa/commit/7e90e938b7c9baee012a70e7b6cc2acf02e6e6cf))
+* code of conduct ([d6bca25](https://github.com/enricodeleo/cambusa/commit/d6bca25936445de8617e82f8fe07f0b816fa78cc))
+* contributing docs ([51b0bec](https://github.com/enricodeleo/cambusa/commit/51b0bec99b8cf4abb679a935bd4629d45236fe35))
+
+
+### Styles
+
+* reindent ([f6f20a7](https://github.com/enricodeleo/cambusa/commit/f6f20a7a55f00419dd6a33c7948470896933c0c2))
+
 ## [0.5.2](https://github.com/enricodeleo/cambusa/compare/0.5.1...0.5.2) (2024-09-20)
 
 
