@@ -50,3 +50,26 @@ To use WebSockets in your Cambusa application:
 
 ![WebSocket example](./assets/websocket-example.png);
 
+### Subscribing to Entity Updates
+
+Clients can subscribe to entity updates by sending a WebSocket message:
+
+```javascript
+{
+  "type": "subscribe",
+  "entityName": "User"
+}
+```
+
+### Receiving Entity Updates
+
+Once subscribed, clients will receive messages for entity updates:
+
+```javascript
+{
+  "type": "entityUpdate",
+  "entityName": "User",
+  "updateType": "insert" | "update" | "remove",
+  "payload": { /* updated entity data */ }
+}
+```

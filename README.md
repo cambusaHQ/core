@@ -284,11 +284,9 @@ GET /users?populate=orders,profile
 
 ## WebSocket
 
-Cambusa uses a WebSocket handler to manage WebSocket connections and messages.
+Cambusa uses a WebSocket handler to manage WebSocket connections and messages. It now supports real-time entity updates through subscriptions.
 
 [🔗 WebSocket documentation](./docs/WEBSOCKET.md)
-
-This will return users along with their related orders and profile information.
 
 ## Middleware System
 
