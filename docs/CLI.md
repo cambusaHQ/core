@@ -116,16 +116,16 @@ export default async function (cambusa, args) {
     const batchSize = args.includes('--batchSize') ? args[args.indexOf('--batchSize') + 1] : 100;
     const dryRun = args.includes('--dryRun') ? args[args.indexOf('--dryRun') + 1] === 'true' : false;
 
-    console.log('Starting User Migration...');
-    console.log(`Batch Size: ${batchSize}`);
-    console.log(`Dry Run: ${dryRun}`);
+    cambusa.log.info('Starting User Migration...');
+    cambusa.log.info(`Batch Size: ${batchSize}`);
+    cambusa.log.info(`Dry Run: ${dryRun}`);
 
     // Fetch users
     const users = await cambusa.models.User.findAll();
-    console.log(`Found ${users.length} users.`);
+    cambusa.log.info(`Found ${users.length} users.`);
 
     if (dryRun) {
-      console.log('Dry run enabled. No changes will be made.');
+      cambusa.log.info('Dry run enabled. No changes will be made.');
       // Implement dry run logic here
     } else {
       // Implement migration logic here
@@ -137,12 +137,12 @@ export default async function (cambusa, args) {
           user.isMigrated = true;
           await user.save();
         }
-        console.log(`Migrated batch ${i / batchSize + 1}`);
+        cambusa.log.info(`Migrated batch ${i / batchSize + 1}`);
       }
-      console.log('User Migration completed successfully.');
+      cambusa.log.info('User Migration completed successfully.');
     }
 
-    console.log('Script executed successfully.');
+    cambusa.log.info('Script executed successfully.');
   } catch (error) {
     console.error('Error executing migrateUsers script:', error);
     process.exit(1);
