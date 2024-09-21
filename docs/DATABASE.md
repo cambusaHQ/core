@@ -65,7 +65,7 @@ Here are the predefined types you can use when defining columns in your models:
 
 #### Defining Columns with Types
 
-Each column in a model can be defined with one of the above types. Here’s an example of defining various column types in a User model:
+Each column in a model can be defined with one of the above types. Here's an example of defining various column types in a User model:
 
 **Example:** `api/models/User.js`
 

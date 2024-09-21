@@ -99,7 +99,7 @@ bun run bin/cambusa.js run <scriptPath> [args...]
 - `<scriptPath>`: The path to the script relative to the `./scripts` directory. Use forward slashes (`/`) to denote subdirectories.
 - `[args...]`: Optional arguments to pass to the script.
 
-### Example: running a script in a subdirectory
+### Example: running a script in a subdirectory
 
 Suppose you have a script `migrateUsers.js` inside the `./scripts/migrations` directory.
 

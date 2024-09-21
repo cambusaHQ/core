@@ -20,6 +20,7 @@ The name reflects my modest approach to web development, inspired by Sails.js bu
 - Flexible Configuration: Manage settings via config files, environment variables, or command-line arguments.
 - Automatic Routing: Define routes in configuration files that map directly to controller actions.
 - Modular Architecture: Organize your codebase with a clear structure for controllers, services, and utilities.
+- WebSocket Support: Easily integrate WebSocket functionality for real-time communication.
 
 ## Getting Started
 
@@ -39,7 +40,6 @@ bun install
 ```
 
 ### Project Structure
-
 ```bash
 cambusa-app/
 ├── api
@@ -68,11 +68,11 @@ bun run app.js
 
 ## Configuration
 
-**Cambusa** uses a flexible configuration system. Configurations are split into files within the `config/` directory, allowing you to manage settings for different aspects of your application, such as server settings, database connections, and custom configurations.
+Cambusa uses a flexible configuration system. Configurations are split into files within the `config/` directory, allowing you to manage settings for different aspects of your application.
 
-Cambusa automagically supports **envirnoment variables** and **command line arguments** blending them into configuration properties.
+Cambusa automatically supports **environment variables** and **command line arguments**, blending them into configuration properties.
 
-[🔗 Config documentation](./docs/CONFIG.md)
+For detailed information on configuration options and best practices, see the [Configuration Guide](./docs/CONFIGURATION.md).
 
 ## The `cambusa` Global Object
 
@@ -282,6 +282,12 @@ This will return all active users who are 30 years old.
 GET /users?populate=orders,profile
 ```
 
+## WebSocket
+
+Cambusa uses a WebSocket handler to manage WebSocket connections and messages.
+
+[🔗 WebSocket documentation](./docs/WEBSOCKET.md)
+
 This will return users along with their related orders and profile information.
 
 ## Middleware System
@@ -434,3 +440,4 @@ MIT License
 ## Author
 
 [Enrico Deleo](https://enricodeleo.com/)
+
