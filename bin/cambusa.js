@@ -20,7 +20,10 @@ program
     'warn'
   );
 
-// Helper function to import Cambusa with the specified log level
+/**
+ * Helper function to import Cambusa with the specified log level
+ * @returns {Promise<Object>} The imported Cambusa instance
+ */
 async function importCambusa() {
   const cambusa = await import('../app.js');
   return cambusa.default;
@@ -48,6 +51,7 @@ function getAllScripts(dir, baseDir) {
   return scripts;
 }
 
+// Command to generate a new model
 program
   .command('models:generate <name>')
   .description('Generate a new model')
@@ -69,6 +73,7 @@ program
     console.log(`Model ${name} created at ${filePath}`);
   });
 
+// Command to list all models
 program
   .command('models:list')
   .description('List all models')
@@ -93,6 +98,7 @@ program
     models.forEach((model) => console.log(`- ${model}`));
   });
 
+// Command to start the Cambusa server
 program
   .command('lift')
   .description('Start the Cambusa server')
@@ -111,6 +117,7 @@ program
     }
   });
 
+// Command to list all registered routes
 program
   .command('routes:list')
   .description('List all registered routes')
@@ -133,6 +140,7 @@ program
     }
   });
 
+// Command to generate a new controller
 program
   .command('controllers:generate <name>')
   .description('Generate a new controller')
@@ -192,6 +200,7 @@ program
     }
   });
 
+// Command to synchronize database schema
 program
   .command('db:sync')
   .description('Synchronize database schema')
@@ -211,6 +220,7 @@ program
     }
   });
 
+// Command to generate a new migration based on entity changes
 program
   .command('migrations:generate <name>')
   .description('Generate a new migration based on entity changes')
@@ -297,6 +307,7 @@ program
     }
   });
 
+// Command to run pending migrations
 program
   .command('migrations:run')
   .description('Run pending migrations')
@@ -334,6 +345,7 @@ program
     }
   });
 
+// Command to create a new empty migration
 program
   .command('migrations:create <name>')
   .description('Create a new empty migration')
@@ -368,6 +380,7 @@ program
     }
   });
 
+// Command to start an interactive REPL session with Cambusa loaded
 program
   .command('repl')
   .description('Start an interactive REPL session with Cambusa loaded')
@@ -442,6 +455,7 @@ program
     }
   });
 
+// Command to run a script from the ./scripts directory or its subdirectories with optional arguments
 program
   .command('run <scriptPath> [args...]')
   .description(
@@ -486,6 +500,7 @@ program
     }
   });
 
+// Command to list all available scripts in the ./scripts directory and its subdirectories
 program
   .command('scripts:list')
   .description(
@@ -514,4 +529,5 @@ program
     }
   });
 
+// Parse command line arguments
 program.parse(process.argv);

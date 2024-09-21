@@ -3,25 +3,14 @@ import { existsSync, readdirSync } from 'fs';
 import minimist from 'minimist';
 import path from 'path';
 import { boolean as toBoolean, isBooleanable } from 'boolean';
+import { merge as _merge } from 'lodash';
 
-// Function to deeply merge two objects
-function deepMerge(target, source) {
-  for (const key in source) {
-    if (
-      source[key] &&
-      typeof source[key] === 'object' &&
-      !Array.isArray(source[key])
-    ) {
-      if (!target[key]) target[key] = {};
-      deepMerge(target[key], source[key]);
-    } else {
-      target[key] = source[key];
-    }
-  }
-  return target;
-}
-
-// Function to parse a value and convert it to the appropriate type
+/**
+ * Parses a value and converts it to the appropriate type.
+ * Handles booleans, numbers, arrays, and objects.
+ * @param {*} value - The value to parse.
+ * @returns {*} The parsed value.
+ */
 function parseValue(value) {
   if (typeof value !== 'string') {
     return value; // Return the value as is if it's not a string
@@ -54,7 +43,10 @@ function parseValue(value) {
   return trimmedValue; // Return the string as is if no conversion was possible
 }
 
-// Load and merge configuration fragments
+/**
+ * Loads and merges configuration fragments from the config directory.
+ * @returns {Promise<Object>} A promise that resolves to the merged configuration object.
+ */
 async function loadConfigurations() {
   const configData = {};
   const configDir = path.join(process.cwd(), 'config');
@@ -69,13 +61,18 @@ async function loadConfigurations() {
   for (const file of configFiles) {
     const configFilePath = path.join(configDir, file);
     const configModule = await import(configFilePath);
-    deepMerge(configData, configModule.default || configModule);
+    _merge(configData, configModule.default || configModule);
   }
 
   return configData;
 }
 
-// Helper function to set a nested value in the config object
+/**
+ * Sets a nested value in the config object using a dot-notated key.
+ * @param {Object} obj - The object to modify.
+ * @param {string} key - The dot-notated key representing the path to set.
+ * @param {*} value - The value to set.
+ */
 function setConfigValue(obj, key, value) {
   const keys = key.split('.');
   let current = obj;
@@ -96,7 +93,12 @@ function setConfigValue(obj, key, value) {
   current[keys[keys.length - 1]] = parseValue(value); // Apply the parsed value
 }
 
-// Apply environment variables to the configuration
+/**
+ * Applies environment variables to the configuration.
+ * Only processes variables that start with the given prefix.
+ * @param {Object} config - The configuration object to modify.
+ * @param {string} [prefix='CAMBUSA__'] - The prefix for relevant environment variables.
+ */
 function applyEnvVariables(config, prefix = 'CAMBUSA__') {
   for (const key in process.env) {
     // Only process environment variables that start with the given prefix
@@ -113,19 +115,28 @@ function applyEnvVariables(config, prefix = 'CAMBUSA__') {
   }
 }
 
-// Apply command-line arguments to the configuration
+/**
+ * Applies command-line arguments to the configuration.
+ * @param {Object} config - The configuration object to modify.
+ * @param {Object} argv - The parsed command-line arguments.
+ */
 function applyCommandLineArgs(config, argv) {
   const { _, ...args } = argv; // eslint-disable-line no-unused-vars
-  deepMerge(config, args);
+  _merge(config, args);
 }
 
-// Initialize and export configuration
+/**
+ * Initializes and returns the final configuration object.
+ * This function loads default configurations, applies environment variables,
+ * loads environment-specific and user-specific configurations, and applies command-line arguments.
+ * @returns {Promise<Object>} A promise that resolves to the final configuration object.
+ */
 async function initConfig() {
   let config = {};
 
   // Load default configurations
   const defaultConfig = await loadConfigurations();
-  deepMerge(config, defaultConfig);
+  _merge(config, defaultConfig);
 
   // Apply environment variables
   applyEnvVariables(config);
@@ -141,7 +152,7 @@ async function initConfig() {
   const envConfigPath = path.join(process.cwd(), 'config', 'env', `${env}.js`);
   if (existsSync(envConfigPath)) {
     const envConfig = await import(envConfigPath);
-    deepMerge(config, envConfig.default || envConfig);
+    _merge(config, envConfig.default || envConfig);
   }
 
   // Load user-specific configuration values from the user's home directory
@@ -152,7 +163,7 @@ async function initConfig() {
   );
   if (existsSync(userConfigPath)) {
     const userConfig = await import(userConfigPath);
-    deepMerge(config, userConfig.default || userConfig);
+    _merge(config, userConfig.default || userConfig);
   }
 
   // Apply command-line arguments
