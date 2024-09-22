@@ -36,19 +36,40 @@ To use WebSockets in your Cambusa application:
 
 1. **Enable WebSocket support** in your server configuration.
 2. Send messages from the client **in the following format**:
-```json
+```javascript
 {
+  "type": "query",
   "method": "GET",
-  "route": "/api/messages",
-  "data": {
-    "message": "Hello, WebSocket!"
-  }
+  "route": "/users",
+  "query": { "limit": 10, "offset": 0 }
 }
 ```
 3. Handle WebSocket messages in your existing route handlers. The WebSocket handler will convert the message to an HTTP-like request and execute the corresponding route handler.
 4. Send responses back to the client through the WebSocket connection.
 
 ![WebSocket example](./assets/websocket-example.png);
+
+## WebSocket Message Format and Validation
+
+Cambusa uses a specific message format for WebSocket communications and validates incoming messages to ensure they conform to the expected structure. This helps maintain consistency and security in your application's real-time communication.
+
+### Message Structure
+
+WebSocket messages in Cambusa should follow this general structure:
+
+### Field Descriptions
+
+- `type` (required): Specifies the type of message. Common types include "query", "subscribe", and "unsubscribe".
+- `method` (optional): For query-type messages, specifies the HTTP method (e.g., "GET", "POST", "PUT", "DELETE").
+- `route` (optional): The server route to be called, similar to HTTP endpoints.
+- `data` (optional): The payload of the message, typically used for POST or PUT operations.
+- `query` (optional): Query string parameters.
+
+### Available Types
+
+- `query`: Send a query to the server.
+- `subscribe`: Subscribe to entity updates.
+- `unsubscribe`: Unsubscribe from entity updates.
 
 ### Subscribing to Entity Updates
 
@@ -57,7 +78,18 @@ Clients can subscribe to entity updates by sending a WebSocket message:
 ```javascript
 {
   "type": "subscribe",
-  "entityName": "User"
+  "model": "User"
+}
+```
+
+### Unsubscribing from Entity Updates
+
+Clients can unsubscribe from entity updates by sending a WebSocket message:
+
+```javascript
+{
+  "type": "unsubscribe",
+  "model": "User"
 }
 ```
 
@@ -67,9 +99,81 @@ Once subscribed, clients will receive messages for entity updates:
 
 ```javascript
 {
-  "type": "entityUpdate",
-  "entityName": "User",
-  "updateType": "insert" | "update" | "remove",
-  "payload": { /* updated entity data */ }
+  "type": "update",
+  "model": "User",
+  "action": "insert" | "update" | "remove",
+  "data": { /* updated entity data */ }
 }
 ```
+
+## WebSocket Message Format and Validation
+
+Cambusa uses a specific message format for WebSocket communications and validates incoming messages to ensure they conform to the expected structure. This helps maintain consistency and security in your application's real-time communication.
+
+### Message Structure
+
+WebSocket messages in Cambusa should follow this general structure:
+
+```javascript
+{
+  type: String,
+  method: String (optional),
+  route: String (optional),
+  data: Any (optional),
+  query: Any (optional)
+}
+```
+
+### Validation Schema
+
+Cambusa uses the following validation schema for WebSocket messages:
+
+```javascript
+body: t.Object({
+  type: t.String(),
+  method: t.Optional(t.String()),
+  route: t.Optional(t.String()),
+  data: t.Optional(t.Any()),
+  query: t.Optional(t.Any()),
+})
+```
+
+### Field Descriptions
+
+- `type` (required): Specifies the type of message. Common types include "query", "subscribe", and "unsubscribe".
+- `method` (optional): For query-type messages, specifies the HTTP method (e.g., "GET", "POST", "PUT", "DELETE").
+- `route` (optional): The server route to be called, similar to HTTP endpoints.
+- `data` (optional): The payload of the message, typically used for POST or PUT operations.
+- `query` (optional): Query string parameters.
+
+### Examples
+
+1. Querying data:
+```javascript
+{
+  "type": "query",
+  "method": "GET",
+  "route": "/users",
+  "query": { "limit": 10, "offset": 0 }
+}
+```
+
+2. Subscribing to entity updates:
+```javascript
+{
+  "type": "subscribe",
+  "model": "User"
+}
+```
+
+3. Updating data:
+```javascript
+{
+  "type": "query",
+  "method": "PUT",
+  "route": "/users/123",
+  "data": { "name": "John Doe", "email": "john@example.com" }
+}
+```
+
+By adhering to this message format and validation schema, you ensure that your WebSocket communications with Cambusa are consistent and properly structured, facilitating smooth real-time interactions in your application.
