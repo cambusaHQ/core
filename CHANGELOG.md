@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.9.1](https://github.com/enricodeleo/cambusa/compare/0.9.0...0.9.1) (2024-09-22)
+
+
+### Features
+
+* introduce app.js as main entry and adjust package.json scripts ([3eacea4](https://github.com/enricodeleo/cambusa/commit/3eacea46a404eab84303466e46692e7dfa37f02d))
+
+
+### Chores
+
+* reference to new repo ([4e9a083](https://github.com/enricodeleo/cambusa/commit/4e9a083b14d99a2e7b12567819391cb706f861f2))
+
 ## [0.9.0](https://github.com/enricodeleo/cambusa/compare/0.8.0...0.9.0) (2024-09-22)
 
 
