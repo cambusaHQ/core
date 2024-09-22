@@ -1,8 +1,7 @@
 {
-  "name": "@enricodeleo/cambusa",
+  "name": "@cambusa/core",
   "version": "0.8.0",
   "license": "MIT",
-  "private": true,
   "bin": {
     "cambusa": "bin/cambusa.js"
   },
