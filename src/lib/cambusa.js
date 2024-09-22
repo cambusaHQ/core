@@ -25,7 +25,7 @@ import loadHooks from '@lib/hooksLoader.js';
 
 import config from 'config/index.js';
 
-class Cambusa {
+export class Cambusa {
   // Public properties
   config;
   app;
