@@ -8,7 +8,9 @@
 
 import 'dotenv/config';
 import { Elysia } from 'elysia';
-import { createRequire } from 'module';
+import { fileURLToPath } from 'url';
+import { dirname, join } from 'path';
+import { readFileSync } from 'fs';
 
 import loadMiddlewares from '@lib/middlewaresLoader.js';
 import blueprints from '@lib/router/blueprints.js';
@@ -213,10 +215,25 @@ export class Cambusa {
    * Retrieves the version from package.json
    */
   get version() {
-    const require = createRequire(import.meta.url);
-    const { version } = require('@root/package.json');
+    try {
+      let packagePath;
 
-    return version;
+      // First, try to resolve the package as if it's installed as a dependency
+      try {
+        packagePath = require.resolve('@cambusa/core/package.json');
+      } catch (error) {
+        // If that fails, assume we're in local development
+        const __filename = fileURLToPath(import.meta.url);
+        const __dirname = dirname(__filename);
+        packagePath = join(__dirname, '..', '..', 'package.json');
+      }
+
+      const { version } = JSON.parse(readFileSync(packagePath, 'utf8'));
+      return version;
+    } catch (error) {
+      this.log.error(`Error reading package.json: ${error.message}`);
+      return 'unknown';
+    }
   }
 }
 
