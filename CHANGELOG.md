@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.9.2](https://github.com/enricodeleo/cambusa/compare/0.9.1...0.9.2) (2024-09-22)
+
+
+### Features
+
+* **cambusa.js:** replace createRequire with fs and path methods for version retrieval to enhance compatibility with ES modules ([9622344](https://github.com/enricodeleo/cambusa/commit/96223445d17634d82bcf4fe0f25745c9931d53cb))
+
 ## [0.9.1](https://github.com/enricodeleo/cambusa/compare/0.9.0...0.9.1) (2024-09-22)
 
 
