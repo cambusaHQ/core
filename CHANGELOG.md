@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.9.0](https://github.com/enricodeleo/cambusa/compare/0.8.0...0.9.0) (2024-09-22)
+
+
+### Chores
+
+* cli as separate package ([8bc2acc](https://github.com/enricodeleo/cambusa/commit/8bc2accdf320e79146f5147e657dddc6dda7b561))
+* move functionalities to src ([0e838c9](https://github.com/enricodeleo/cambusa/commit/0e838c9875f07bbd8a6f7944b5ff5296e759e33c))
+* publish more directories ([73f8f9a](https://github.com/enricodeleo/cambusa/commit/73f8f9a6bcb5be6ef0dcb7a175df3fcffd55d827))
+
 ## [0.8.0](https://github.com/enricodeleo/cambusa/compare/0.7.0...0.8.0) (2024-09-22)
 
 
