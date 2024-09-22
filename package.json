@@ -1,6 +1,6 @@
 {
   "name": "@cambusa/core",
-  "version": "0.9.3",
+  "version": "0.9.4",
   "license": "MIT",
   "bin": {
     "cambusa": "bin/cambusa.js"

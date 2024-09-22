@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.9.4](https://github.com/enricodeleo/cambusa/compare/0.9.3...0.9.4) (2024-09-22)
+
+
+### Chores
+
+* update .gitignore to exclude /dist directory ([f31c86f](https://github.com/enricodeleo/cambusa/commit/f31c86f7e81215a8e7f0d55d9cad7d7dfff003e1))
+
 ## [0.9.3](https://github.com/enricodeleo/cambusa/compare/0.9.2...0.9.3) (2024-09-22)
 
 
