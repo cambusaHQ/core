@@ -32,7 +32,7 @@ The name reflects my modest approach to web development, inspired by Sails.js bu
 
 ```bash
 # Clone the repository (assuming Cambusa is hosted on GitHub)
-git clone https://github.com/enricodeleo/cambusa.git
+git clone https://github.com/cambusaHQ/core.git
 cd cambusa
 
 # Install dependencies
