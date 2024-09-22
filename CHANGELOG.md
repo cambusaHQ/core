@@ -1,5 +1,24 @@
 # Changelog
 
+## [0.7.0](https://github.com/enricodeleo/cambusa/compare/0.6.0...0.7.0) (2024-09-22)
+
+
+### Features
+
+* **README.md, WEBSOCKET.md, cambusa.js, datastore, websocketHandler:** implement real-time entity updates via WebSocket ([1be7582](https://github.com/enricodeleo/cambusa/commit/1be758290e412c130345ae78fd71425789a55657))
+
+
+### Documentation
+
+* **WEBSOCKET.md:** update WebSocket message format and add validation ([d5876ba](https://github.com/enricodeleo/cambusa/commit/d5876ba4862761ae72a47232c38353955fa3cee2))
+
+
+### Code Refactoring
+
+* **datastore, router:** enhance logging and error handling for clarity and consistency ([8d766c5](https://github.com/enricodeleo/cambusa/commit/8d766c5440ed6bf1a4ce1d1457e2540da9e6c143))
+* **datastore/EntitySubscriber:** streamline event logging and remove unused constructor ([41c6979](https://github.com/enricodeleo/cambusa/commit/41c6979746a60826edfc77b1ecbc58b3d8a76e70))
+* standardize logging with cambusa.log across CLI and lib ([11fb7a5](https://github.com/enricodeleo/cambusa/commit/11fb7a5fc02e27e2a0d44efa15d204d918330564))
+
 ## [0.6.0](https://github.com/enricodeleo/cambusa/compare/0.5.2...0.6.0) (2024-09-21)
 
 
