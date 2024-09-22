@@ -6,20 +6,22 @@
     "cambusa": "bin/cambusa.js"
   },
   "type": "module",
-  "module": "src/index.js",
-  "main": "src/index.js",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "exports": {
+    ".": "./dist/index.js"
+  },
   "engines": {
     "bun": ">= 1.1.28"
   },
   "files": [
-    "src",
-    "api",
-    "config",
-    "scripts"
+    "dist",
+    "src"
   ],
   "scripts": {
     "start": "bun run app.js",
     "dev": "bun run --watch app.js",
+    "build": "bun build ./src/index.js --outdir ./dist --target node",
     "release": "release-it",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
