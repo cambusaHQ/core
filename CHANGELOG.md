@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.8.0](https://github.com/enricodeleo/cambusa/compare/0.7.0...0.8.0) (2024-09-22)
+
+
+### Features
+
+* **EntitySubscriber, websocketHandler:** implement real-time updates via WebSocket ([9ff8bc6](https://github.com/enricodeleo/cambusa/commit/9ff8bc6a63f1251860e8da289c4d76e275396659))
+* **README.md:** add import statement for elysia and update column types to string with email validation ([943dd97](https://github.com/enricodeleo/cambusa/commit/943dd977b6086de5da65c47a9569385df8e521d4))
+
+
+### Code Refactoring
+
+* **docs, websocketHandler:** streamline WebSocket message structure and handling ([5c8e5e9](https://github.com/enricodeleo/cambusa/commit/5c8e5e9b730beaa25115b3fa20a67ff66d56c4c4))
+
 ## [0.7.0](https://github.com/enricodeleo/cambusa/compare/0.6.0...0.7.0) (2024-09-22)
 
 
