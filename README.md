@@ -160,6 +160,8 @@ Blueprints are auto-generated routes that are created based on the model definit
 For a model defined in `api/models/User.js`:
 
 ```js
+import { t } from 'elysia';
+
 export const User = {
   routes: {
     basePath: 'users', // Custom base path for this model
@@ -167,16 +169,17 @@ export const User = {
   },
   columns: {
     firstName: {
-      type: 'varchar',
+      type: 'string',
       nullable: true,
     },
     lastName: {
-      type: 'varchar',
+      type: 'string',
       nullable: true,
     },
     email: {
-      type: 'varchar',
+      type: 'string',
       unique: true,
+      validation: t.String({ format: 'email' }),
     },
   },
 };

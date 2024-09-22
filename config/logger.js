@@ -1,6 +1,6 @@
 export default {
   logger: {
-    level: 'debug',
+    level: 'info',
     logRequests: true,
   },
 };
