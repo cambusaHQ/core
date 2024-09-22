@@ -1,5 +1,9 @@
 import { statSync } from 'fs';
 import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 /**
  * Loads middleware plugins based on the provided configuration
@@ -11,20 +15,56 @@ export async function loadMiddlewares(config) {
   const middlewares = [];
 
   for (const middlewareName of orderedMiddlewares) {
-    // Construct the full file path for the middleware
-    const filePath = path.join('api/middlewares', `${middlewareName}.js`);
-    const stat = statSync(filePath);
+    let middleware;
 
-    // Check if the file exists and is a JavaScript file
-    if (stat.isFile() && filePath.endsWith('.js')) {
-      // Dynamically import the middleware plugin based on the order
-      const plugin = await import(filePath);
+    // First, try to load from the user's project
+    try {
+      const userFilePath = path.join(
+        process.cwd(),
+        'api',
+        'middlewares',
+        `${middlewareName}.js`
+      );
+      const stat = statSync(userFilePath);
 
-      // Log the successful loading of the middleware
-      cambusa.log.verbose(`[Middleware]: ${middlewareName} loaded`);
+      if (stat.isFile() && userFilePath.endsWith('.js')) {
+        middleware = await import(userFilePath);
+        cambusa.log.verbose(
+          `[Middleware]: ${middlewareName} loaded from user project`
+        );
+      }
+    } catch (error) {
+      // If not found in user's project, try to load from the core package
+      try {
+        const coreFilePath = path.join(
+          __dirname,
+          '..',
+          'api',
+          'middlewares',
+          `${middlewareName}.js`
+        );
+        const stat = statSync(coreFilePath);
 
-      // Add the middleware function to the array
-      middlewares.push(plugin.default);
+        if (stat.isFile() && coreFilePath.endsWith('.js')) {
+          middleware = await import(coreFilePath);
+          cambusa.log.verbose(
+            `[Middleware]: ${middlewareName} loaded from core package`
+          );
+        }
+      } catch (coreError) {
+        cambusa.log.error(
+          `Error loading middleware ${middlewareName}: Not found in user project or core package`
+        );
+        continue;
+      }
+    }
+
+    if (middleware && middleware.default) {
+      middlewares.push(middleware.default);
+    } else {
+      cambusa.log.error(
+        `Error loading middleware ${middlewareName}: Invalid middleware format`
+      );
     }
   }
 
