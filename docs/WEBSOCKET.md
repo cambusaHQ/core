@@ -63,7 +63,6 @@ WebSocket messages in Cambusa should follow this general structure:
 - `method` (optional): For query-type messages, specifies the HTTP method (e.g., "GET", "POST", "PUT", "DELETE").
 - `route` (optional): The server route to be called, similar to HTTP endpoints.
 - `data` (optional): The payload of the message, typically used for POST or PUT operations.
-- `params` (optional): URL parameters, similar to those in REST API calls.
 - `query` (optional): Query string parameters.
 
 ### Available Types
@@ -79,7 +78,18 @@ Clients can subscribe to entity updates by sending a WebSocket message:
 ```javascript
 {
   "type": "subscribe",
-  "entityName": "User"
+  "model": "User"
+}
+```
+
+### Unsubscribing from Entity Updates
+
+Clients can unsubscribe from entity updates by sending a WebSocket message:
+
+```javascript
+{
+  "type": "unsubscribe",
+  "model": "User"
 }
 ```
 
@@ -89,10 +99,10 @@ Once subscribed, clients will receive messages for entity updates:
 
 ```javascript
 {
-  "type": "entityUpdate",
-  "entityName": "User",
-  "updateType": "insert" | "update" | "remove",
-  "payload": { /* updated entity data */ }
+  "type": "update",
+  "model": "User",
+  "action": "insert" | "update" | "remove",
+  "data": { /* updated entity data */ }
 }
 ```
 
@@ -110,7 +120,6 @@ WebSocket messages in Cambusa should follow this general structure:
   method: String (optional),
   route: String (optional),
   data: Any (optional),
-  params: Any (optional),
   query: Any (optional)
 }
 ```
@@ -125,7 +134,6 @@ body: t.Object({
   method: t.Optional(t.String()),
   route: t.Optional(t.String()),
   data: t.Optional(t.Any()),
-  params: t.Optional(t.Any()),
   query: t.Optional(t.Any()),
 })
 ```
@@ -136,7 +144,6 @@ body: t.Object({
 - `method` (optional): For query-type messages, specifies the HTTP method (e.g., "GET", "POST", "PUT", "DELETE").
 - `route` (optional): The server route to be called, similar to HTTP endpoints.
 - `data` (optional): The payload of the message, typically used for POST or PUT operations.
-- `params` (optional): URL parameters, similar to those in REST API calls.
 - `query` (optional): Query string parameters.
 
 ### Examples
@@ -155,7 +162,7 @@ body: t.Object({
 ```javascript
 {
   "type": "subscribe",
-  "entityName": "User"
+  "model": "User"
 }
 ```
 
