@@ -1,6 +1,3 @@
-// @lib/hooksLoader.js
-// This module is responsible for loading and executing hooks in the Cambusa framework
-
 import fs from 'fs';
 import path from 'path';
 

@@ -2,13 +2,14 @@
   "compilerOptions": {
     "baseUrl": "./", // Set the base URL for the project
     "paths": {
-      "@/*": ["./*"],
-      "@bin/*": ["bin/*"],
-      "@config/*": ["config/*"],
-      "@controllers/*": ["api/controllers/*"],
-      "@lib/*": ["lib/*"],
-      "@middlewares/*": ["middlewares/*"],
-      "@models/*": ["models/*"]
+      "@/*": ["./src/*", "./node_modules/@cambusa/core/src/*"],
+      "@root/*": ["./*", "./node_modules/@cambusa/core/*"],
+      "@api/*": ["api/*", "./node_modules/@cambusa/core/src/api/*"],
+      "@config/*": ["config/*", "./node_modules/@cambusa/core/src/config/*"],
+      "@lib/*": ["./src/lib/*", "./node_modules/@cambusa/core/src/lib/*"],
+      "@middlewares/*": ["./src/middlewares/*", "./node_modules/@cambusa/core/src/middlewares/*"],
+      "@models/*": ["api/models/*", "./node_modules/@cambusa/core/src/api/models/*"],
+      "@utils/*": ["./src/utils/*", "./node_modules/@cambusa/core/src/utils/*"]
     }
   },
   "exclude": ["node_modules"]

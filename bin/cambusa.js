@@ -9,7 +9,7 @@ import { program } from 'commander';
 import { $ } from 'bun';
 
 const require = createRequire(import.meta.url);
-const { version } = require('../package.json');
+const { version } = require('@root/package.json');
 
 program
   .version(version)
@@ -25,7 +25,7 @@ program
  * @returns {Promise<Object>} The imported Cambusa instance
  */
 async function importCambusa() {
-  const cambusa = await import('../app.js');
+  const cambusa = await import('@/app.js');
   return cambusa.default;
 }
 

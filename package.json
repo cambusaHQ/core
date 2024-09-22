@@ -6,13 +6,18 @@
     "cambusa": "bin/cambusa.js"
   },
   "type": "module",
-  "module": "app.js",
+  "module": "src/app.js",
+  "main": "src/app.js",
   "engines": {
     "bun": ">= 1.1.28"
   },
+  "files": [
+    "src",
+    "bin"
+  ],
   "scripts": {
-    "start": "bun run app.js",
-    "dev": "bun run --watch app.js",
+    "start": "bun run src/app.js",
+    "dev": "bun run --watch src/app.js",
     "release": "release-it",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",

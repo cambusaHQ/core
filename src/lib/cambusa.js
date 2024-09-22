@@ -10,20 +10,20 @@ import 'dotenv/config';
 import { Elysia } from 'elysia';
 import { createRequire } from 'module';
 
-import loadMiddlewares from '@lib/middlewaresLoader';
-import blueprints from '@lib/router/blueprints';
+import loadMiddlewares from '@lib/middlewaresLoader.js';
+import blueprints from '@lib/router/blueprints.js';
 import defineRoutes from '@lib/router/routes.js';
-import loadHelpers from '@lib/helpersLoader';
+import loadHelpers from '@lib/helpersLoader.js';
 import {
   loadSchemas,
   prepareEntities,
   datastore,
 } from '@lib/datastore/datastore.js';
-import logger from '@lib/logger';
-import welcomeBanner from '@lib/welcomeBanner';
-import loadHooks from '@lib/hooksLoader';
+import logger from '@lib/logger.js';
+import welcomeBanner from '@lib/welcomeBanner.js';
+import loadHooks from '@lib/hooksLoader.js';
 
-import config from '@/config';
+import config from 'config/index.js';
 
 class Cambusa {
   // Public properties
@@ -214,7 +214,7 @@ class Cambusa {
    */
   get version() {
     const require = createRequire(import.meta.url);
-    const { version } = require('../package.json');
+    const { version } = require('@root/package.json');
 
     return version;
   }
