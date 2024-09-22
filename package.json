@@ -13,7 +13,6 @@
   },
   "files": [
     "src",
-    "bin",
     "api",
     "config",
     "scripts"
