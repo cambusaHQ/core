@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.9.5](https://github.com/enricodeleo/cambusa/compare/0.9.4...0.9.5) (2024-09-22)
+
+
+### Features
+
+* **middlewaresLoader.js:** enhance middleware loading with user project and core package support ([0b75400](https://github.com/enricodeleo/cambusa/commit/0b75400d8b5377c48bd44ddf21eacda723cc3739))
+
 ## [0.9.4](https://github.com/enricodeleo/cambusa/compare/0.9.3...0.9.4) (2024-09-22)
 
 
