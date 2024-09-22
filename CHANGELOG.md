@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.9.3](https://github.com/enricodeleo/cambusa/compare/0.9.2...0.9.3) (2024-09-22)
+
+
+### Chores
+
+* remove bin ([49e5bfd](https://github.com/enricodeleo/cambusa/commit/49e5bfdb08c6c92edcce3d8bfcfe62a5f843b10a))
+
 ## [0.9.2](https://github.com/enricodeleo/cambusa/compare/0.9.1...0.9.2) (2024-09-22)
 
 
