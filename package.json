@@ -13,7 +13,10 @@
   },
   "files": [
     "src",
-    "bin"
+    "bin",
+    "api",
+    "config",
+    "scripts"
   ],
   "scripts": {
     "start": "bun run src/app.js",
