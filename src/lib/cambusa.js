@@ -222,6 +222,10 @@ export class Cambusa {
       try {
         packagePath = require.resolve('@cambusa/core/package.json');
       } catch (error) {
+        this.log.silly(
+          error,
+          'package.json not found in dependencies, using local path'
+        );
         // If that fails, assume we're in local development
         const __filename = fileURLToPath(import.meta.url);
         const __dirname = dirname(__filename);
