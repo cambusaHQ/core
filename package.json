@@ -59,5 +59,23 @@
       "eslint --fix",
       "prettier --write"
     ]
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cambusaHQ/core"
+  },
+  "homepage": "https://github.com/cambusaHQ/core",
+  "keywords": [
+    "backend",
+    "framework",
+    "bun",
+    "api",
+    "rest",
+    "database",
+    "orm",
+    "server",
+    "web",
+    "websockets",
+    "application"
+  ]
 }
