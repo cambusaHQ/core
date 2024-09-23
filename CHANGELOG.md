@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.9.7](https://github.com/enricodeleo/cambusa/compare/0.9.6...0.9.7) (2024-09-23)
+
+
+### Code Refactoring
+
+* simplify jsconfig paths and adjust import in index.js for clarity ([8ec30c5](https://github.com/enricodeleo/cambusa/commit/8ec30c52c429322f80c8eac4e92b861eb386fe59))
+
 ## [0.9.6](https://github.com/enricodeleo/cambusa/compare/0.9.5...0.9.6) (2024-09-23)
 
 
