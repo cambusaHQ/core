@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.9.6](https://github.com/enricodeleo/cambusa/compare/0.9.5...0.9.6) (2024-09-23)
+
+
+### Code Refactoring
+
+* **package.json:** remove dist build process, use src directly for simplicity ([e145d4e](https://github.com/enricodeleo/cambusa/commit/e145d4ecef8ba64d860d36b5b6cdbc737b572d84))
+
 ## [0.9.5](https://github.com/enricodeleo/cambusa/compare/0.9.4...0.9.5) (2024-09-22)
 
 
