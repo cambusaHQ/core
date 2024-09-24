@@ -1,3 +1,6 @@
+
+![Cambusa](https://github.com/user-attachments/assets/11d40fd1-69b3-4b95-ac0b-065b45395204)
+
 # Cambusa
 
 🚣 A modern, high-performance web framework built with Bun and modern JavaScript.
