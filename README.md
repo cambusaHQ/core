@@ -1,5 +1,5 @@
 
-![Cambusa](https://github.com/user-attachments/assets/11d40fd1-69b3-4b95-ac0b-065b45395204)
+<img align="center" width="150" height="150" src="https://github.com/user-attachments/assets/11d40fd1-69b3-4b95-ac0b-065b45395204" />
 
 # Cambusa
 
