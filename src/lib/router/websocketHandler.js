@@ -3,9 +3,6 @@ import { t } from 'elysia';
 // Store subscriptions
 const subscriptions = new Map();
 
-// Store sessions
-const sessions = new Map();
-
 export const websocketHandler = {
   body: t.Object({
     type: t.String(),
@@ -20,7 +17,6 @@ export const websocketHandler = {
   open(ws) {
     cambusa.log.debug('WebSocket connected');
     ws.subscribe('all'); // Subscribe to a general channel
-    sessions.set(ws.data.id, { /* session data */ });
   },
 
   // Handle incoming messages
@@ -41,7 +37,6 @@ export const websocketHandler = {
   close(ws) {
     cambusa.log.debug('WebSocket disconnected');
     removeAllSubscriptions(ws);
-    sessions.delete(ws.data.id);
   },
 };
 
@@ -53,9 +48,9 @@ function handleSubscription(ws, message) {
   }
 
   if (!subscriptions.has(model)) {
-    subscriptions.set(model, new Map());
+    subscriptions.set(model, new Set());
   }
-  subscriptions.get(model).set(ws.data.id, ws);
+  subscriptions.get(model).add(ws);
   ws.send({ message: `Subscribed to ${model} changes` });
 }
 
@@ -66,7 +61,7 @@ function handleUnsubscription(ws, message) {
     return;
   }
 
-  subscriptions.get(model).delete(ws.data.id);
+  subscriptions.get(model).delete(ws);
   if (subscriptions.get(model).size === 0) {
     subscriptions.delete(model);
   }
@@ -75,7 +70,7 @@ function handleUnsubscription(ws, message) {
 
 function removeAllSubscriptions(ws) {
   for (let [model, subscribers] of subscriptions.entries()) {
-    subscribers.delete(ws.data.id);
+    subscribers.delete(ws);
     if (subscribers.size === 0) {
       subscriptions.delete(model);
     }
