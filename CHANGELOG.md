@@ -1,5 +1,29 @@
 # Changelog
 
+## [0.9.8](https://github.com/cambusaHQ/core/compare/0.9.7...0.9.8) (2024-09-30)
+
+
+### Features
+
+* **websocketHandler.js:** add session management for WebSocket connections ([6f50113](https://github.com/cambusaHQ/core/commit/6f50113da6cae9ebdc63a46f831e4d102cb6a605))
+
+
+### Documentation
+
+* toc ([d30c406](https://github.com/cambusaHQ/core/commit/d30c40630a02896cf1d7b1ebcf1d6b98ada2ce3a))
+* toc ([7bb4f1e](https://github.com/cambusaHQ/core/commit/7bb4f1e1168d6db87b7b45bdf9b3c71be28ce01e))
+
+
+### Code Refactoring
+
+* disable sessions ([27ec3b0](https://github.com/cambusaHQ/core/commit/27ec3b099cabfcb237ed33fe7e3ab44ae71f4a49))
+* **websocketHandler.js:** improve logging and subscription management for WebSocket connections to enhance clarity and maintainability ([55bb805](https://github.com/cambusaHQ/core/commit/55bb805248f4feb490595f22069205d1b03abd49))
+
+
+### Chores
+
+* reference to github project ([0e489b2](https://github.com/cambusaHQ/core/commit/0e489b2bd5df8cd2be140fe8ec703ffb2422335a))
+
 ## [0.9.7](https://github.com/enricodeleo/cambusa/compare/0.9.6...0.9.7) (2024-09-23)
 
 
