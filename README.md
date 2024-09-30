@@ -2,6 +2,11 @@
   <img width="150" height="150" src="https://github.com/user-attachments/assets/11d40fd1-69b3-4b95-ac0b-065b45395204" />
 </p>
 
+![License](https://img.shields.io/github/license/cambusaHQ/core)
+![NPM Version](https://img.shields.io/npm/v/%40cambusa%2Fcore) 
+![npm downloads](https://img.shields.io/npm/dt/@cambusa/core)
+![GitHub Stars](https://img.shields.io/github/stars/cambusaHQ/core?style=social)
+
 # Cambusa
 
 🚣 A modern, high-performance web framework built with Bun and modern JavaScript.
